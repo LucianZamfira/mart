@@ -2,6 +2,12 @@
 
 Astro website for Marian's paintings, with static homepages and on-demand artwork detail pages on Netlify. Romanian is available at `/` and English at `/en/`. The hero displays artwork photographs in a decorative circular composition. Artist copy is provisional.
 
+## Logo
+
+The logo has a Didone serif style, similar to **Didot** or **Bodoni**, with strong contrast between thick and thin strokes. These are stylistic references, not an identification of the exact font used in the generated concept.
+
+The production logo, `public/images/mart-monogram.svg`, was traced from the approved image. Its lettering consists of vector outlines and does not depend on an installed or web-loaded font.
+
 ## Development
 
 Use Node.js 24. Run `npm ci`, then `npm start` (or `npm run dev`). Open `http://localhost:4321`. Changes reload automatically; press Ctrl+C to stop the server. Run `npm run check` and `npm run build` before publishing. Use `npm start` for local development, including SSR routes. Netlify packages the production SSR handler through the official adapter.

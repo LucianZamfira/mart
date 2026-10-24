@@ -1,5 +1,6 @@
 ---
 import ArtworkCard from './flex/ArtworkCard.astro';
+import SectionLabel from './ui/SectionLabel.astro';
 import { getArtworks, type Language } from '../lib/artworks';
 import '../styles/global.css';
 interface Props { lang: Language }
@@ -39,13 +40,14 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         <div class="hero-foot"><span>{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><span>MART GALLERY <span aria-hidden="true">↓</span></span></div>
       </section>
       <section id="gallery" class="gallery wrap">
-        <div class="section-head"><div><p class="eyebrow">01 / {t('GALERIE', 'GALLERY')}</p><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare pânză, o altă poveste.', 'Every canvas, another story.')}</p></div>
+        <div class="section-head"><div><SectionLabel number="01" label={t('GALERIE', 'GALLERY')} /><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare pânză, o altă poveste.', 'Every canvas, another story.')}</p></div>
         <div class="filters">
           <label>{t('Tehnică', 'Technique')}<select id="technique"><option value="">{t('Toate tehnicile', 'All techniques')}</option>{techniques.map(value => <option>{value}</option>)}</select></label>
           <label>{t('Colecție', 'Collection')}<select id="collection"><option value="">{t('Toate colecțiile', 'All collections')}</option>{collections.map(value => <option>{value}</option>)}</select></label>
           <span id="count" role="status" aria-live="polite" data-unit={t('lucrări', 'works')}>{artworks.length} {t('lucrări', 'works')}</span>
         </div>
-        <div class="artworks">{artworks.map(artwork => <ArtworkCard artwork={artwork} />)}</div>
+        <div class="artworks" id="artwork-grid">{artworks.map(artwork => <ArtworkCard artwork={artwork} />)}</div>
+        <div class="gallery-more" hidden><button class="button" id="load-more" type="button" aria-controls="artwork-grid">{t('Încarcă mai multe', 'Load more')} <span aria-hidden="true">↓</span></button></div>
         <div class="empty" id="empty" hidden={artworks.length > 0}><span aria-hidden="true">✳</span><h3>{t('Poveștile pe pânză ajung în curând.', 'Stories on canvas are coming soon.')}</h3><p>{t('Pregătim primele lucrări pentru galerie. Până atunci, ne poți scrie mai jos.', 'We are preparing the first works for the gallery. In the meantime, get in touch below.')}</p></div>
         <p id="no-results" class="empty" hidden>{t('Nicio lucrare nu corespunde filtrelor selectate.', 'No works match the selected filters.')}</p>
       </section>
@@ -53,7 +55,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         <div class="atelier-texture" aria-hidden="true"></div>
         <div class="wrap atelier-inner">
           <div class="atelier-art" aria-hidden="true">
-            <span class="atelier-number">02 / {t('ATELIER', 'STUDIO')}</span>
+            <div class="atelier-number"><SectionLabel number="02" label={t('ATELIER', 'STUDIO')} /></div>
             <img class="atelier-concept" src="/images/atelier-concept.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
           </div>
           <div class="atelier-copy">
@@ -62,13 +64,13 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
             <span class="atelier-rule" aria-hidden="true"></span>
             <p class="atelier-description">{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian Preoteșescu’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p>
             <div class="atelier-bottom">
-              <a class="atelier-identity" href="https://ro.linkedin.com/in/marian-preotesescu-b3748060" target="_blank" rel="noopener noreferrer" aria-label={t('Profilul LinkedIn al lui Marian Preoteșescu (se deschide într-o filă nouă)', 'Marian Preoteșescu on LinkedIn (opens in a new tab)')} title={t('Vezi profilul LinkedIn', 'View LinkedIn profile')}><img src="/images/marian-preotesescu.png" alt="" width="44" height="44" loading="lazy" decoding="async" /></a>
+              <a class="atelier-identity" href="https://ro.linkedin.com/in/marian-preotesescu-b3748060" target="_blank" rel="noopener noreferrer" aria-label={t('Profilul LinkedIn al lui Marian Preoteșescu (se deschide într-o filă nouă)', 'Marian Preoteșescu on LinkedIn (opens in a new tab)')} title={t('Vezi profilul LinkedIn', 'View LinkedIn profile')}><img src="/images/marian-preotesescu.png" alt="" width="44" height="44" loading="lazy" decoding="async" /><span>{t('Vezi profilul LinkedIn', 'View LinkedIn profile')} <span aria-hidden="true">↗</span></span></a>
               <a class="atelier-link" href="#gallery">{t('Explorează lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </div>
       </section>
-      <section id="contact" class="contact wrap"><div><p class="eyebrow">03 / CONTACT</p><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări sau un simplu salut.', 'For details about the paintings, or just to say hello.')}</p><a class="email" style="display: none;" href="mailto:zbarcea2003@yahoo.com">zbarcea2003@yahoo.com ↗</a></div>
+      <section id="contact" class="contact wrap"><div><SectionLabel number="03" label="CONTACT" /><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări sau un simplu salut.', 'For details about the paintings, or just to say hello.')}</p><a class="email" style="display: none;" href="mailto:zbarcea2003@yahoo.com">zbarcea2003@yahoo.com ↗</a></div>
         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={ro ? '/multumim/' : '/en/thank-you/'}>
           <input type="hidden" name="form-name" value="contact" /><input type="hidden" name="language" value={lang} />
           <p hidden><label>Leave empty <input name="bot-field" /></label></p>
@@ -94,19 +96,39 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
           ? `Bună ziua! Aș dori mai multe detalii despre lucrarea „${title}”.`
           : `Hello! I would like more information about the artwork “${title}”.`;
       }
-      function filter() {
-        let visible = 0;
+      const loadMore = document.querySelector<HTMLButtonElement>('#load-more');
+      const moreContainer = document.querySelector<HTMLElement>('.gallery-more');
+      let limit = 6;
+      function renderGallery() {
+        let matched = 0;
+        let firstNew: HTMLElement | undefined;
         cards.forEach(card => {
-          card.hidden = Boolean((technique?.value && card.dataset.technique !== technique.value) || (collection?.value && card.dataset.collection !== collection.value));
-          if (!card.hidden) visible++;
+          const matches = (!technique?.value || card.dataset.technique === technique.value)
+            && (!collection?.value || card.dataset.collection === collection.value);
+          const show = Boolean(matches && matched < limit);
+          if (show && card.hidden && !firstNew) firstNew = card;
+          card.hidden = !show;
+          if (matches) matched++;
         });
         const count = document.querySelector('#count');
-        if (count) count.textContent = `${visible} ${count.getAttribute('data-unit')}`;
+        const shown = Math.min(limit, matched);
+        if (count) count.textContent = document.documentElement.lang === 'ro'
+          ? `${shown} din ${matched} lucrări`
+          : `${shown} of ${matched} works`;
         const empty = document.querySelector<HTMLElement>('#no-results');
-        if (empty) empty.hidden = visible > 0 || cards.length === 0;
+        if (empty) empty.hidden = matched > 0 || cards.length === 0;
+        if (moreContainer) moreContainer.hidden = shown >= matched;
+        return firstNew;
       }
+      function filter() { limit = 6; renderGallery(); }
+      loadMore?.addEventListener('click', () => {
+        limit += 6;
+        const firstNew = renderGallery();
+        firstNew?.shadowRoot?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+      });
       technique?.addEventListener('change', filter);
       collection?.addEventListener('change', filter);
+      renderGallery();
     </script>
   </body>
 </html>

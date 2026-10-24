@@ -78,5 +78,125 @@
       "en": "A face composed of geometric fragments, with contrasting blue, yellow and orange tones.",
       "ro": "Un chip construit din fragmente geometrice, în contraste de albastru, galben și portocaliu."
     }
+  },
+  {
+    "file": "test-01.png",
+    "slug": "test-01",
+    "title": {
+      "ro": "TEST 01 — Portret generat",
+      "en": "TEST 01 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "test-02.png",
+    "slug": "test-02",
+    "title": {
+      "ro": "TEST 02 — Portret generat",
+      "en": "TEST 02 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "test-03.png",
+    "slug": "test-03",
+    "title": {
+      "ro": "TEST 03 — Portret generat",
+      "en": "TEST 03 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "test-04.png",
+    "slug": "test-04",
+    "title": {
+      "ro": "TEST 04 — Portret generat",
+      "en": "TEST 04 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "test-05.png",
+    "slug": "test-05",
+    "title": {
+      "ro": "TEST 05 — Portret generat",
+      "en": "TEST 05 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "test-06.png",
+    "slug": "test-06",
+    "title": {
+      "ro": "TEST 06 — Portret generat",
+      "en": "TEST 06 — Generated portrait"
+    },
+    "technique": {
+      "ro": "Imagine generată (test)",
+      "en": "Generated image (test)"
+    },
+    "collection": {
+      "ro": "Teste",
+      "en": "Tests"
+    },
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
   }
 ]
