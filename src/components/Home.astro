@@ -32,12 +32,12 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     </header>
     <main id="main">
       <section class="hero hero-color wrap">
-        <div class="hero-painting hero-portrait" aria-hidden="true"><img src="/paintings/184744.webp" alt="" width="1870" height="1873" fetchpriority="high" /></div><div class="hero-painting hero-bird" aria-hidden="true"><img src="/paintings/184741.webp" alt="" width="1870" height="1873" /></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
+        <div class="hero-painting hero-portrait" aria-hidden="true"><img src="/paintings/184744.webp" alt="" width="1870" height="1873" fetchpriority="high" /><video id="hero-video" muted loop playsinline preload="none" poster="/paintings/184744.webp" data-src="/paintings/animated-paint.mp4"></video></div><div class="hero-painting hero-bird" aria-hidden="true"><img src="/paintings/184741.webp" alt="" width="1870" height="1873" /></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
           <h1>{t('Lumea, privită', 'The world, seen')}<br /><em>{t('în culori.', 'in colour.')}</em></h1>
           <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Un loc pentru pictură, emoție și lucrurile care merită privite mai îndeaproape.', 'A place for painting, emotion and the things that deserve a closer look.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="hero-foot"><span>{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><span>MART GALLERY <span aria-hidden="true">↓</span></span></div>
+        <button type="button" class="hero-video-toggle" hidden data-pause={t('Oprește animația', 'Pause animation')} data-play={t('Pornește animația', 'Play animation')}>{t('Oprește animația', 'Pause animation')}</button><div class="hero-foot"><span class="label">{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><span>MART GALLERY <span aria-hidden="true">↓</span></span></div>
       </section>
       <section id="gallery" class="gallery wrap">
         <div class="section-head"><div><SectionLabel number="01" label={t('GALERIE', 'GALLERY')} /><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare pânză, o altă poveste.', 'Every canvas, another story.')}</p></div>
@@ -84,6 +84,38 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     </main>
     <footer class="wrap"><span>© {new Date().getFullYear()} MART Gallery</span><span>{t('Artă care rămâne cu tine.', 'Art that stays with you.')}</span><a href="#main">{t('Înapoi sus', 'Back to top')} ↑</a></footer>
     <script>
+      const heroVideo = document.querySelector<HTMLVideoElement>('#hero-video');
+      const videoToggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (heroVideo && videoToggle) {
+        const updateVideo = () => {
+          if (reducedMotion.matches) {
+            heroVideo.pause();
+            heroVideo.parentElement?.classList.remove('is-playing');
+            videoToggle.hidden = true;
+            return;
+          }
+          if (!heroVideo.getAttribute('src')) heroVideo.src = heroVideo.dataset.src || '';
+          heroVideo.muted = true;
+          heroVideo.play().catch(() => { videoToggle.hidden = false; videoToggle.textContent = videoToggle.dataset.play || ''; });
+        };
+        heroVideo.addEventListener('playing', () => {
+          heroVideo.parentElement?.classList.add('is-playing');
+          videoToggle.hidden = false;
+          videoToggle.textContent = videoToggle.dataset.pause || '';
+        });
+        heroVideo.addEventListener('pause', () => { videoToggle.textContent = videoToggle.dataset.play || ''; });
+        heroVideo.addEventListener('error', () => {
+          heroVideo.parentElement?.classList.remove('is-playing');
+          videoToggle.hidden = true;
+        });
+        videoToggle.addEventListener('click', () => {
+          if (heroVideo.paused) heroVideo.play().catch(() => {});
+          else heroVideo.pause();
+        });
+        reducedMotion.addEventListener('change', updateVideo);
+        updateVideo();
+      }
       const technique = document.querySelector<HTMLSelectElement>('#technique');
       const collection = document.querySelector<HTMLSelectElement>('#collection');
       const cards = Array.from(document.querySelectorAll<HTMLElement>('artwork-card'));
