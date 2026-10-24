@@ -49,7 +49,25 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         <div class="empty" id="empty" hidden={artworks.length > 0}><span aria-hidden="true">✳</span><h3>{t('Poveștile pe pânză ajung în curând.', 'Stories on canvas are coming soon.')}</h3><p>{t('Pregătim primele lucrări pentru galerie. Până atunci, ne poți scrie mai jos.', 'We are preparing the first works for the gallery. In the meantime, get in touch below.')}</p></div>
         <p id="no-results" class="empty" hidden>{t('Nicio lucrare nu corespunde filtrelor selectate.', 'No works match the selected filters.')}</p>
       </section>
-      <section id="about" class="about"><div class="wrap about-inner"><p class="eyebrow">02 / {t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p><div><h2>{t('O privire personală.', 'A personal perspective.')}<br /><em>{t('O lume de descoperit.', 'A world to discover.')}</em></h2><p>{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian Preoteșescu’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p><div class="artist-profile"><img class="artist-avatar" src="/images/marian-preotesescu.png" alt={t('Portretul lui Marian Preoteșescu', 'Portrait of Marian Preoteșescu')} width="200" height="200" loading="lazy" decoding="async" /><span class="signature">Marian Preoteșescu</span></div></div></div></section>
+      <section id="about" class="about about-atelier" aria-labelledby="artist-heading">
+        <div class="atelier-texture" aria-hidden="true"></div>
+        <div class="wrap atelier-inner">
+          <div class="atelier-art" aria-hidden="true">
+            <span class="atelier-number">02 / {t('ATELIER', 'STUDIO')}</span>
+            <img class="atelier-concept" src="/images/atelier-concept.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+          </div>
+          <div class="atelier-copy">
+            <p class="eyebrow">{t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p>
+            <h2 id="artist-heading">Marian Preoteșescu</h2>
+            <span class="atelier-rule" aria-hidden="true"></span>
+            <p class="atelier-description">{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian Preoteșescu’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p>
+            <div class="atelier-bottom">
+              <a class="atelier-identity" href="https://ro.linkedin.com/in/marian-preotesescu-b3748060" target="_blank" rel="noopener noreferrer" aria-label={t('Profilul LinkedIn al lui Marian Preoteșescu (se deschide într-o filă nouă)', 'Marian Preoteșescu on LinkedIn (opens in a new tab)')} title={t('Vezi profilul LinkedIn', 'View LinkedIn profile')}><img src="/images/marian-preotesescu.png" alt="" width="44" height="44" loading="lazy" decoding="async" /></a>
+              <a class="atelier-link" href="#gallery">{t('Explorează lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="contact" class="contact wrap"><div><p class="eyebrow">03 / CONTACT</p><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări sau un simplu salut.', 'For details about the paintings, or just to say hello.')}</p><a class="email" style="display: none;" href="mailto:zbarcea2003@yahoo.com">zbarcea2003@yahoo.com ↗</a></div>
         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={ro ? '/multumim/' : '/en/thank-you/'}>
           <input type="hidden" name="form-name" value="contact" /><input type="hidden" name="language" value={lang} />
@@ -67,6 +85,15 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
       const technique = document.querySelector<HTMLSelectElement>('#technique');
       const collection = document.querySelector<HTMLSelectElement>('#collection');
       const cards = Array.from(document.querySelectorAll<HTMLElement>('artwork-card'));
+      const requestedArtwork = new URLSearchParams(window.location.search).get('artwork');
+      const message = document.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+      if (requestedArtwork && message && !message.value) {
+        const card = cards.find(item => item.getAttribute('href')?.split('/').filter(Boolean).pop() === requestedArtwork);
+        const title = card?.querySelector('[slot="title"]')?.textContent;
+        if (title) message.value = document.documentElement.lang === 'ro'
+          ? `Bună ziua! Aș dori mai multe detalii despre lucrarea „${title}”.`
+          : `Hello! I would like more information about the artwork “${title}”.`;
+      }
       function filter() {
         let visible = 0;
         cards.forEach(card => {

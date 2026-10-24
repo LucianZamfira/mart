@@ -1,0 +1,8 @@
+---
+import ArtworkPage from '../../components/ArtworkPage.astro';
+import { getArtworks } from '../../lib/artworks';
+export const prerender = false;
+const artwork = getArtworks('ro').find(item => item.slug === Astro.params.slug);
+if (!artwork) return new Response('Lucrarea nu a fost găsită.', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+---
+<ArtworkPage artwork={artwork} lang="ro" />

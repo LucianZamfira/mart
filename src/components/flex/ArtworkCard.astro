@@ -3,7 +3,7 @@ import type { Artwork } from '../../lib/artworks';
 interface Props { artwork: Artwork }
 const { artwork } = Astro.props;
 ---
-<artwork-card data-technique={artwork.technique} data-collection={artwork.collection}>
+<artwork-card href={artwork.url} data-technique={artwork.technique} data-collection={artwork.collection}>
   <img slot="image" src={artwork.image} alt={artwork.title} width="800" height="1000" loading="lazy" decoding="async" />
   <span slot="title">{artwork.title}</span>
   <span slot="details">{artwork.technique} · {artwork.collection}</span>

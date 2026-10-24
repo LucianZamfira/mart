@@ -1,0 +1,8 @@
+---
+import ArtworkPage from '../../../components/ArtworkPage.astro';
+import { getArtworks } from '../../../lib/artworks';
+export const prerender = false;
+const artwork = getArtworks('en').find(item => item.slug === Astro.params.slug);
+if (!artwork) return new Response('Artwork not found.', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+---
+<ArtworkPage artwork={artwork} lang="en" />

@@ -108,3 +108,86 @@ textarea {
 @media (max-width: 700px) {
   .brand-mark { width: 82px; height: auto; }
 }
+
+/* Artwork-led artist introduction with a discreet portrait. */
+.about-atelier {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg);
+  padding-block: 64px;
+  border-block: 1px solid #ded9cf;
+}
+.atelier-inner {
+  display: grid;
+  grid-template-columns: 44% minmax(0, 1fr);
+  gap: 5%;
+  align-items: center;
+}
+.atelier-art { position: relative; height: 350px; }
+.atelier-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+.atelier-number::after {
+  content: '';
+  display: inline-block;
+  width: 45px;
+  margin-left: 16px;
+  border-top: 1px solid;
+  vertical-align: middle;
+}
+.atelier-painting { position: absolute; border-radius: 50%; overflow: hidden; aspect-ratio: 1; }
+.atelier-painting img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
+.atelier-face { width: 68%; left: 0; top: 40px; z-index: 1; }
+.atelier-bird { width: 49%; right: 0; bottom: 5px; border: 6px solid var(--bg); }
+.atelier-copy { position: relative; z-index: 2; padding-block: 12px; }
+.atelier-copy .eyebrow { font-size: 10px; margin-bottom: 18px; }
+.atelier-copy h2 { font-size: clamp(34px, 3.8vw, 56px); letter-spacing: -2px; line-height: 1.15; }
+.atelier-rule { display: block; width: 62px; height: 2px; background: var(--accent); margin-top: 20px; }
+.about-atelier .atelier-description { font-size: 15px; line-height: 1.85; max-width: 540px; margin: 22px 0 26px; }
+.atelier-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.atelier-identity { display: flex; align-items: center; gap: 12px; }
+.atelier-identity img { border-radius: 50%; width: 44px; height: 44px; object-fit: cover; }
+.atelier-identity span { font-size: 11px; letter-spacing: 1px; }
+.atelier-link { color: var(--accent); border-bottom: 1px solid; padding-block: 8px; font-size: 13px; }
+.atelier-link span { margin-left: 12px; }
+.atelier-link:hover { color: var(--ink); }
+.atelier-texture {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 18%;
+  z-index: -1;
+  opacity: .16;
+  background: url('/paintings/184744.png') 65% 45% / auto 150%;
+  mask-image: linear-gradient(to right, transparent, #000);
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  .atelier-art { height: 290px; }
+  .atelier-face { top: 48px; }
+  .atelier-bird { bottom: 26px; }
+}
+@media (max-width: 700px) {
+  .about-atelier { padding-block: 38px 45px; }
+  .atelier-inner { grid-template-columns: 1fr; gap: 26px; }
+  .atelier-art { width: min(100%, 420px); height: auto; aspect-ratio: 1.35; margin-inline: auto; }
+  .atelier-face { top: 30px; width: 62%; }
+  .atelier-bird { width: 46%; bottom: 0; right: 4%; border-width: 4px; }
+  .atelier-copy h2 { font-size: clamp(34px, 8vw, 48px); }
+  .atelier-copy .eyebrow { margin-bottom: 14px; }
+  .atelier-texture { width: 30%; opacity: .08; }
+  .atelier-bottom { gap: 16px; }
+}
+
+/* Generated decorative artwork from the approved Atelier concept. */
+.atelier-concept { display: block; position: absolute; width: 100%; height: 100%; object-fit: contain; inset: 20px 0 0; }
+.atelier-texture { background-image: url('/images/atelier-concept.png'); background-position: 20% 45%; background-size: auto 160%; opacity: .22; }
+@media (max-width: 700px) {
+  .atelier-concept { inset-block-start: 22px; }
+  .atelier-texture { opacity: .1; }
+}

@@ -1,26 +1,82 @@
 [
   {
     "file": "184741.png",
-    "title": { "ro": "Pasărea in amiază zi", "en": "Blue Bird" },
-    "technique": { "ro": "Acrilic", "en": "Acrylic" },
-    "collection": { "ro": "Păsări", "en": "Birds" }
+    "title": {
+      "ro": "Pasărea in amiază zi",
+      "en": "Blue Bird"
+    },
+    "technique": {
+      "ro": "Acrilic",
+      "en": "Acrylic"
+    },
+    "collection": {
+      "ro": "Păsări",
+      "en": "Birds"
+    },
+    "slug": "pasarea-in-amiaza-zi",
+    "description": {
+      "en": "A blue bird takes shape against a luminous background of yellow, green and orange.",
+      "ro": "O pasăre albastră se conturează pe un fundal luminos, în tonuri de galben, verde și portocaliu."
+    }
   },
   {
     "file": "184742.png",
-    "title": { "ro": "Tropical în culori", "en": "Parrot in Blue and Gold" },
-    "technique": { "ro": "Acrilic", "en": "Acrylic" },
-    "collection": { "ro": "Păsări", "en": "Birds" }
+    "title": {
+      "ro": "Tropical în culori",
+      "en": "Parrot in Blue and Gold"
+    },
+    "technique": {
+      "ro": "Acrilic",
+      "en": "Acrylic"
+    },
+    "collection": {
+      "ro": "Păsări",
+      "en": "Birds"
+    },
+    "slug": "tropical-in-culori",
+    "description": {
+      "en": "A blue and gold parrot stands out against a background of deep green tones.",
+      "ro": "Un papagal în albastru și auriu se desprinde dintr-un fundal în tonuri profunde de verde."
+    }
   },
   {
     "file": "184743.png",
-    "title": { "ro": "Femeie în abstract", "en": "Portrait in Turquoise" },
-    "technique": { "ro": "Acrilic", "en": "Acrylic" },
-    "collection": { "ro": "Portrete", "en": "Portraits" }
+    "title": {
+      "ro": "Femeie în abstract",
+      "en": "Portrait in Turquoise"
+    },
+    "technique": {
+      "ro": "Acrilic",
+      "en": "Acrylic"
+    },
+    "collection": {
+      "ro": "Portrete",
+      "en": "Portraits"
+    },
+    "slug": "femeie-in-abstract",
+    "description": {
+      "en": "A stylised face defined by expressive eyes and accents of turquoise, black and ochre.",
+      "ro": "Un chip stilizat, definit de ochi expresivi și accente de turcoaz, negru și ocru."
+    }
   },
   {
     "file": "184744.png",
-    "title": { "ro": "Chip în fragmente de culoare", "en": "Face in Fragments of Colour" },
-    "technique": { "ro": "Acrilic", "en": "Acrylic" },
-    "collection": { "ro": "Portrete", "en": "Portraits" }
+    "title": {
+      "ro": "Chip în fragmente de culoare",
+      "en": "Face in Fragments of Colour"
+    },
+    "technique": {
+      "ro": "Acrilic",
+      "en": "Acrylic"
+    },
+    "collection": {
+      "ro": "Portrete",
+      "en": "Portraits"
+    },
+    "slug": "chip-in-fragmente-de-culoare",
+    "description": {
+      "en": "A face composed of geometric fragments, with contrasting blue, yellow and orange tones.",
+      "ro": "Un chip construit din fragmente geometrice, în contraste de albastru, galben și portocaliu."
+    }
   }
 ]
