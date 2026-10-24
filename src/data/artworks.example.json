@@ -1,0 +1,8 @@
+[
+  {
+    "file": "example.jpg",
+    "title": { "ro": "Titlul lucrării", "en": "Artwork title" },
+    "technique": { "ro": "Ulei pe pânză", "en": "Oil on canvas" },
+    "collection": { "ro": "Peisaje", "en": "Landscapes" }
+  }
+]
