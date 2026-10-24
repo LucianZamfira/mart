@@ -37,7 +37,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
           <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Un loc pentru pictură, emoție și lucrurile care merită privite mai îndeaproape.', 'A place for painting, emotion and the things that deserve a closer look.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
         </div>
-        <button type="button" class="hero-video-toggle" hidden data-pause={t('Oprește animația', 'Pause animation')} data-play={t('Pornește animația', 'Play animation')}>{t('Oprește animația', 'Pause animation')}</button><div class="hero-foot"><span class="label">{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><span>MART GALLERY <span aria-hidden="true">↓</span></span></div>
+        <button type="button" class="hero-video-toggle" hidden data-pause={t('Oprește animația', 'Pause animation')} data-play={t('Pornește animația', 'Play animation')}>{t('Oprește animația', 'Pause animation')}</button><div class="hero-foot"><span class="label">{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><a href="#gallery" title="MART GALLERY">MART GALLERY <span aria-hidden="true">↓</span></a></div>
       </section>
       <section id="gallery" class="gallery wrap">
         <div class="section-head"><div><SectionLabel number="01" label={t('GALERIE', 'GALLERY')} /><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare pânză, o altă poveste.', 'Every canvas, another story.')}</p></div>

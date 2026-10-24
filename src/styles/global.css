@@ -68,11 +68,11 @@ textarea {
 .hero-color .button:hover { background: var(--ink); }
 .hero-painting { position: absolute; z-index: -1; overflow: hidden; border-radius: 50%; width: 43%; aspect-ratio: 1; }
 .hero-painting img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.09); }
-.hero-portrait { left: -15%; top: 28px; transform: rotate(-6deg); }
+.hero-portrait { left: -10%; top: 14px; transform: rotate(-6deg); }
 .hero-bird { right: -15%; bottom: 90px; transform: rotate(-20deg); }
 .hero-dot { position: absolute; z-index: -2; border-radius: 50%; }
 .dot-blue { width: 130px; height: 130px; background: #327e89; right: 23%; top: 40px; }
-.dot-gold { width: 85px; height: 85px; background: #cb942b; left: 24%; bottom: 120px; }
+.dot-gold { width: 136px; height: 136px; background: #cb942b; left: 26%; bottom: 120px; }
 .hero-color .hero-foot { width: 88%; margin: 65px auto 0; padding-top: 20px; }
 .hero-foot .label { background-color: white; align-items: center; display: inline-flex; padding-inline: 12px; }
 @media (min-width: 1500px) {
