@@ -16,7 +16,7 @@ Use Node.js 24. Run `npm ci`, then `npm start` (or `npm run dev`). Open `http://
 
 Put JPG, PNG, WebP or AVIF files directly in `public/paintings/`, then commit and push. They are discovered automatically at build time. Use reasonably sized, web-optimized images; files in public are served unchanged. Without metadata, the filename becomes the title, the technique is unspecified and the collection is Studio.
 
-Copy entries from `src/data/artworks.example.json` into `src/data/artworks.json` to supply bilingual titles, techniques and collections. The `file` field must exactly match the image filename, including its extension. The example is a fixture only and is never displayed. Both filters are combined. Missing photographs produce an intentional empty state.
+Copy entries from `src/data/artworks.example.json` into `src/data/artworks.json` to supply bilingual titles, techniques and collections. The `file` field can contain the filename with or without its image extension. Metadata also matches by filename stem when an image changes from PNG/JPG to WebP/AVIF; keep the stem unchanged. The example is a fixture only and is never displayed. Both filters are combined. Missing photographs produce an intentional empty state.
 
 ## Components
 

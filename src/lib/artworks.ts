@@ -20,12 +20,22 @@ export interface Artwork {
   collection: string;
 }
 const entries: ArtworkMetadata[] = metadata;
+const imageStem = (file: string): string => file.replace(/\.(jpe?g|png|webp|avif)$/i, '');
+
+/** Resolve a painting by its filename, with or without an image extension. */
+export function paintingImage(name: string): string | undefined {
+  const file = __PAINTING_FILES__.find(file => file === name)
+    || __PAINTING_FILES__.find(file => /\.(jpe?g|png|webp|avif)$/i.test(file) && imageStem(file) === imageStem(name));
+  return file ? `/paintings/${encodeURIComponent(file)}` : undefined;
+}
+
 export function getArtworks(lang: Language): Artwork[] {
   return [...__PAINTING_FILES__]
     .filter(file => /\.(jpe?g|png|webp|avif)$/i.test(file))
     .sort((a, b) => a.localeCompare(b))
     .map(file => {
-      const item = entries.find(entry => entry.file === file);
+      const item = entries.find(entry => entry.file === file)
+        || entries.find(entry => imageStem(entry.file) === imageStem(file));
       const slug = item?.slug || file.replace(/\.[^.]+$/, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       return {
         slug,
