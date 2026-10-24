@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "file": "184741.png",
+    "title": { "ro": "Pasărea in amiază zi", "en": "Blue Bird" },
+    "technique": { "ro": "Acrilic", "en": "Acrylic" },
+    "collection": { "ro": "Păsări", "en": "Birds" }
+  },
+  {
+    "file": "184742.png",
+    "title": { "ro": "Tropical în culori", "en": "Parrot in Blue and Gold" },
+    "technique": { "ro": "Acrilic", "en": "Acrylic" },
+    "collection": { "ro": "Păsări", "en": "Birds" }
+  },
+  {
+    "file": "184743.png",
+    "title": { "ro": "Femeie în abstract", "en": "Portrait in Turquoise" },
+    "technique": { "ro": "Acrilic", "en": "Acrylic" },
+    "collection": { "ro": "Portrete", "en": "Portraits" }
+  },
+  {
+    "file": "184744.png",
+    "title": { "ro": "Chip în fragmente de culoare", "en": "Face in Fragments of Colour" },
+    "technique": { "ro": "Acrilic", "en": "Acrylic" },
+    "collection": { "ro": "Portrete", "en": "Portraits" }
+  }
+]

@@ -4,7 +4,7 @@ Static Astro website for Marian's paintings. Romanian is available at `/` and En
 
 ## Development
 
-Use Node.js 24. Run `npm ci`, then `npm run dev`. Run `npm run check` and `npm run build` before publishing. `npm run preview` serves the production build.
+Use Node.js 24. Run `npm ci`, then `npm start` (or `npm run dev`). Open `http://localhost:4321`. Changes reload automatically; press Ctrl+C to stop the server. Run `npm run check` and `npm run build` before publishing. `npm run preview` serves the production build.
 
 ## Add paintings
 

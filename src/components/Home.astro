@@ -15,7 +15,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t('MART Gallery — Picturi de Marian', 'MART Gallery — Paintings by Marian')}</title>
+    <title>{t('MART Gallery — Picturi de Marian Preoteșescu', 'MART Gallery — Paintings by Marian Preoteșescu')}</title>
     <meta name="description" content={t('Descoperă universul pictural al lui Marian. Culoare, lumină și povești pe pânză.', 'Explore Marian’s world of painting. Colour, light and stories on canvas.')} />
     <link rel="alternate" hreflang="ro" href="/" />
     <link rel="alternate" hreflang="en" href="/en/" />
@@ -23,20 +23,19 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
   <body>
     <a class="skip" href="#main">{t('Sari la conținut', 'Skip to content')}</a>
     <header class="wrap">
-      <a class="brand" href={ro ? '/' : '/en/'} aria-label="MART Gallery"><strong>MART</strong><small>GALLERY</small></a>
+      <a class="brand" href={ro ? '/' : '/en/'} aria-label="MART Gallery"><img class="brand-mark" src="/images/mart-monogram.svg" alt="" width="112" height="109" /></a>
       <nav aria-label={t('Navigare principală', 'Main navigation')}>
         <a href="#gallery">{t('Lucrări', 'Works')}</a><a href="#about">{t('Despre', 'About')}</a><a href="#contact">Contact</a>
       </nav>
       <div class="languages" aria-label={t('Limba', 'Language')}><a href="/" lang="ro" aria-current={ro ? 'page' : undefined}>RO</a><span>/</span><a href="/en/" lang="en" aria-current={!ro ? 'page' : undefined}>EN</a></div>
     </header>
     <main id="main">
-      <section class="hero wrap">
-        <div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
+      <section class="hero hero-color wrap">
+        <div class="hero-painting hero-portrait" aria-hidden="true"><img src="/paintings/184744.png" alt="" width="1870" height="1873" fetchpriority="high" /></div><div class="hero-painting hero-bird" aria-hidden="true"><img src="/paintings/184741.png" alt="" width="1870" height="1873" /></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
           <h1>{t('Lumea, privită', 'The world, seen')}<br /><em>{t('în culori.', 'in colour.')}</em></h1>
-          <p class="intro">{t('Un loc pentru pictură, emoție și lucrurile care merită privite mai îndeaproape.', 'A place for painting, emotion and the things that deserve a closer look.')}</p>
+          <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Un loc pentru pictură, emoție și lucrurile care merită privite mai îndeaproape.', 'A place for painting, emotion and the things that deserve a closer look.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="hero-art" aria-hidden="true"><div class="canvas"><span class="sun"></span><span class="hill back"></span><span class="hill front"></span></div><p>{t('CULOARE. LINIȘTE. PERSPECTIVĂ.', 'COLOUR. STILLNESS. PERSPECTIVE.')}</p></div>
         <div class="hero-foot"><span>{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><span>MART GALLERY <span aria-hidden="true">↓</span></span></div>
       </section>
       <section id="gallery" class="gallery wrap">
@@ -50,8 +49,8 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         <div class="empty" id="empty" hidden={artworks.length > 0}><span aria-hidden="true">✳</span><h3>{t('Poveștile pe pânză ajung în curând.', 'Stories on canvas are coming soon.')}</h3><p>{t('Pregătim primele lucrări pentru galerie. Până atunci, ne poți scrie mai jos.', 'We are preparing the first works for the gallery. In the meantime, get in touch below.')}</p></div>
         <p id="no-results" class="empty" hidden>{t('Nicio lucrare nu corespunde filtrelor selectate.', 'No works match the selected filters.')}</p>
       </section>
-      <section id="about" class="about"><div class="wrap about-inner"><p class="eyebrow">02 / {t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p><div><h2>{t('O privire personală.', 'A personal perspective.')}<br /><em>{t('O lume de descoperit.', 'A world to discover.')}</em></h2><p>{t('MART Gallery este spațiul dedicat picturilor lui Marian. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p><span class="signature">Marian</span></div></div></section>
-      <section id="contact" class="contact wrap"><div><p class="eyebrow">03 / CONTACT</p><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări sau un simplu salut.', 'For details about the paintings, or just to say hello.')}</p><a class="email" href="mailto:zbarcea2003@yahoo.com">zbarcea2003@yahoo.com ↗</a></div>
+      <section id="about" class="about"><div class="wrap about-inner"><p class="eyebrow">02 / {t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p><div><h2>{t('O privire personală.', 'A personal perspective.')}<br /><em>{t('O lume de descoperit.', 'A world to discover.')}</em></h2><p>{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian Preoteșescu’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p><div class="artist-profile"><img class="artist-avatar" src="/images/marian-preotesescu.png" alt={t('Portretul lui Marian Preoteșescu', 'Portrait of Marian Preoteșescu')} width="200" height="200" loading="lazy" decoding="async" /><span class="signature">Marian Preoteșescu</span></div></div></div></section>
+      <section id="contact" class="contact wrap"><div><p class="eyebrow">03 / CONTACT</p><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări sau un simplu salut.', 'For details about the paintings, or just to say hello.')}</p><a class="email" style="display: none;" href="mailto:zbarcea2003@yahoo.com">zbarcea2003@yahoo.com ↗</a></div>
         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={ro ? '/multumim/' : '/en/thank-you/'}>
           <input type="hidden" name="form-name" value="contact" /><input type="hidden" name="language" value={lang} />
           <p hidden><label>Leave empty <input name="bot-field" /></label></p>
