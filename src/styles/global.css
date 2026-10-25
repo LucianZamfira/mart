@@ -193,3 +193,12 @@ textarea {
 .hero-portrait.is-playing video { display: block; }
 .hero-portrait.is-playing > img { visibility: hidden; }
 .hero-video-toggle { position: relative; z-index: 2; align-self: center; margin-top: 10px; padding: 8px 12px; background: transparent; color: var(--accent); border: 1px solid currentColor; cursor: pointer; font-size: 11px; }
+
+/* Measured masonry keeps the artwork order in the DOM and natural image proportions. */
+.artworks { --gallery-columns: 3; }
+.artworks.is-masonry { display: block; position: relative; }
+.artworks.is-masonry > artwork-card { position: absolute; margin: 0; }
+@media (max-width: 700px) { .artworks { --gallery-columns: 2; } }
+@media (max-width: 440px) {
+  .artworks { --gallery-columns: 1; grid-template-columns: minmax(0, 1fr); }
+}

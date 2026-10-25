@@ -1,4 +1,6 @@
 import metadata from '../data/artworks.json';
+import { readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 export type Language = 'ro' | 'en';
 export interface Translation { ro: string; en: string }
@@ -22,15 +24,22 @@ export interface Artwork {
 const entries: ArtworkMetadata[] = metadata;
 const imageStem = (file: string): string => file.replace(/\.(jpe?g|png|webp|avif)$/i, '');
 
+function paintingFiles(): string[] {
+  return import.meta.env.DEV
+    ? readdirSync(resolve(process.cwd(), 'public/paintings'))
+    : __PAINTING_FILES__;
+}
+
 /** Resolve a painting by its filename, with or without an image extension. */
 export function paintingImage(name: string): string | undefined {
-  const file = __PAINTING_FILES__.find(file => file === name)
-    || __PAINTING_FILES__.find(file => /\.(jpe?g|png|webp|avif)$/i.test(file) && imageStem(file) === imageStem(name));
+  const files = paintingFiles();
+  const file = files.find(file => file === name)
+    || files.find(file => /\.(jpe?g|png|webp|avif)$/i.test(file) && imageStem(file) === imageStem(name));
   return file ? `/paintings/${encodeURIComponent(file)}` : undefined;
 }
 
 export function getArtworks(lang: Language): Artwork[] {
-  return [...__PAINTING_FILES__]
+  return [...paintingFiles()]
     .filter(file => /\.(jpe?g|png|webp|avif)$/i.test(file))
     .sort((a, b) => a.localeCompare(b))
     .map(file => {

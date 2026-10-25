@@ -36,6 +36,6 @@ One `[slug].astro` route per language renders artwork pages on demand: `/lucrari
 
 Each metadata entry may include a stable `slug` and bilingual `description`. Keep slugs lowercase with hyphens and unique across works. Without an explicit slug, the image filename supplies it. Descriptions are editorial copy, not biographical claims. No dimensions, price, year or availability are assumed.
 
-The build embeds a filename manifest from `public/paintings` into the server bundle; production requests do not read the deployment filesystem. New images or JSON edits still require a deploy. Restart local development after adding image files to refresh the manifest.
+The build embeds a filename manifest from `public/paintings` into the server bundle; production requests do not read the deployment filesystem. New images or JSON edits still require a deploy. During local development, the image directory is read per request and image additions, deletions and changes trigger a browser reload automatically. Production still uses the build-time manifest.
 
 The detail page includes an image dialog (Escape closes it), localized previous/next navigation and a contact link. The latter prefills the homepage message with the artwork title, leaving the visitor to submit it manually.

@@ -1,6 +1,26 @@
 [
   {
-    "file": "184741.png",
+    "file": "184740.webp",
+    "title": {
+      "ro": "Promit ca este ultima",
+      "en": "Last one, I promise"
+    },
+    "technique": {
+      "ro": "Acrilic",
+      "en": "Acrylic"
+    },
+    "collection": {
+      "ro": "Portrete",
+      "en": "Portret"
+    },
+    "slug": "primit-ca-este-ultima",
+    "description": {
+      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
+      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+    }
+  },
+  {
+    "file": "184741.webp",
     "title": {
       "ro": "Pasărea în amiaza zilei",
       "en": "Blue Bird"
@@ -20,7 +40,7 @@
     }
   },
   {
-    "file": "184742.png",
+    "file": "184742.webp",
     "title": {
       "ro": "Tropical în culori",
       "en": "Parrot in Blue and Gold"
@@ -40,7 +60,7 @@
     }
   },
   {
-    "file": "184743.png",
+    "file": "184743.webp",
     "title": {
       "ro": "Femeie în abstract",
       "en": "Portrait in Turquoise"
@@ -60,7 +80,7 @@
     }
   },
   {
-    "file": "184744.png",
+    "file": "184744.webp",
     "title": {
       "ro": "Chip în fragmente de culoare",
       "en": "Face in Fragments of Colour"
@@ -80,120 +100,80 @@
     }
   },
   {
-    "file": "test-01.png",
-    "slug": "test-01",
+    "file": "184745.webp",
     "title": {
-      "ro": "TEST 01 — Portret generat",
-      "en": "TEST 01 — Generated portrait"
+      "ro": "Doamna in rosu",
+      "en": "Lady in red"
     },
     "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
+      "ro": "Acrilic",
+      "en": "Acrylic"
     },
     "collection": {
-      "ro": "Teste",
-      "en": "Tests"
+      "ro": "Portrete",
+      "en": "Portraits"
     },
+    "slug": "doamna-in-rosu",
     "description": {
       "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
       "en": "Generated image for gallery testing. Not an original artwork by the artist."
     }
   },
   {
-    "file": "test-02.png",
-    "slug": "test-02",
+    "file": "184746.webp",
     "title": {
-      "ro": "TEST 02 — Portret generat",
-      "en": "TEST 02 — Generated portrait"
+      "ro": "Fumul din intuneric",
+      "en": "Smoke in the Dark"
     },
     "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
+      "ro": "Acrilic",
+      "en": "Acrylic"
     },
     "collection": {
-      "ro": "Teste",
-      "en": "Tests"
+      "ro": "Portrete",
+      "en": "Portraits"
     },
+    "slug": "fumul-din-intuneric",
     "description": {
       "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
       "en": "Generated image for gallery testing. Not an original artwork by the artist."
     }
   },
   {
-    "file": "test-03.png",
-    "slug": "test-03",
+    "file": "184747.webp",
     "title": {
-      "ro": "TEST 03 — Portret generat",
-      "en": "TEST 03 — Generated portrait"
+      "ro": "Domnul albastru",
+      "en": "The Blue Man"
     },
     "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
+      "ro": "Acrilic",
+      "en": "Acrylic"
     },
     "collection": {
-      "ro": "Teste",
-      "en": "Tests"
+      "ro": "Portrete",
+      "en": "Portraits"
     },
+    "slug": "domnul-albastru",
     "description": {
       "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
       "en": "Generated image for gallery testing. Not an original artwork by the artist."
     }
   },
   {
-    "file": "test-04.png",
-    "slug": "test-04",
+    "file": "184748.webp",
     "title": {
-      "ro": "TEST 04 — Portret generat",
-      "en": "TEST 04 — Generated portrait"
+      "ro": "Ghiveci în albastru",
+      "en": "The blue pot"
     },
     "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
+      "ro": "Acrilic",
+      "en": "Acrylic"
     },
     "collection": {
-      "ro": "Teste",
-      "en": "Tests"
+      "ro": "Flori",
+      "en": "Flowers"
     },
-    "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
-    }
-  },
-  {
-    "file": "test-05.png",
-    "slug": "test-05",
-    "title": {
-      "ro": "TEST 05 — Portret generat",
-      "en": "TEST 05 — Generated portrait"
-    },
-    "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
-    },
-    "collection": {
-      "ro": "Teste",
-      "en": "Tests"
-    },
-    "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
-    }
-  },
-  {
-    "file": "test-06.png",
-    "slug": "test-06",
-    "title": {
-      "ro": "TEST 06 — Portret generat",
-      "en": "TEST 06 — Generated portrait"
-    },
-    "technique": {
-      "ro": "Imagine generată (test)",
-      "en": "Generated image (test)"
-    },
-    "collection": {
-      "ro": "Teste",
-      "en": "Tests"
-    },
+    "slug": "ghiveci-in-albastru",
     "description": {
       "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
       "en": "Generated image for gallery testing. Not an original artwork by the artist."
