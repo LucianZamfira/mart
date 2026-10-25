@@ -15,6 +15,7 @@ const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = absolute(lang === 'ro' ? romanianPath : englishPath);
 ---
 <title>{title}</title>
+<meta name="google-site-verification" content="6bRKA6hpe_1BhrIOB2hn6ObYoo1ezjf9ZrKPwn8VPpc" />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang="ro" href={absolute(romanianPath)} />
