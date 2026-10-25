@@ -15,28 +15,28 @@
     },
     "slug": "primit-ca-este-ultima",
     "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+      "ro": "...",
+      "en": "..."
     }
   },
   {
     "file": "184741.webp",
     "title": {
-      "ro": "Pasărea în amiaza zilei",
-      "en": "Blue Bird"
+      "ro": "Ghiveci în albastru",
+      "en": "The blue pot"
     },
     "technique": {
       "ro": "Acrilic",
       "en": "Acrylic"
     },
     "collection": {
-      "ro": "Păsări",
-      "en": "Birds"
+      "ro": "Flori",
+      "en": "Flowers"
     },
-    "slug": "pasarea-in-amiaza-zi",
+    "slug": "ghiveci-in-albastru",
     "description": {
-      "en": "A blue bird takes shape against a luminous background of yellow, green and orange.",
-      "ro": "O pasăre albastră se conturează pe un fundal luminos, în tonuri de galben, verde și portocaliu."
+      "ro": "...",
+      "en": "..."
     }
   },
   {
@@ -62,8 +62,8 @@
   {
     "file": "184743.webp",
     "title": {
-      "ro": "Femeie în abstract",
-      "en": "Portrait in Turquoise"
+      "ro": "Domnul albastru",
+      "en": "The Blue Man"
     },
     "technique": {
       "ro": "Acrilic",
@@ -73,10 +73,10 @@
       "ro": "Portrete",
       "en": "Portraits"
     },
-    "slug": "femeie-in-abstract",
+    "slug": "domnul-albastru",
     "description": {
-      "en": "A stylised face defined by expressive eyes and accents of turquoise, black and ochre.",
-      "ro": "Un chip stilizat, definit de ochi expresivi și accente de turcoaz, negru și ocru."
+      "ro": "...",
+      "en": "..."
     }
   },
   {
@@ -115,8 +115,8 @@
     },
     "slug": "doamna-in-rosu",
     "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+      "ro": "...",
+      "en": "..."
     }
   },
   {
@@ -135,15 +135,15 @@
     },
     "slug": "fumul-din-intuneric",
     "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+      "ro": "...",
+      "en": "..."
     }
   },
   {
     "file": "184747.webp",
     "title": {
-      "ro": "Domnul albastru",
-      "en": "The Blue Man"
+      "ro": "Femeie în abstract",
+      "en": "Portrait in Turquoise"
     },
     "technique": {
       "ro": "Acrilic",
@@ -153,30 +153,30 @@
       "ro": "Portrete",
       "en": "Portraits"
     },
-    "slug": "domnul-albastru",
+    "slug": "femeie-in-abstract",
     "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+      "en": "A stylised face defined by expressive eyes and accents of turquoise, black and ochre.",
+      "ro": "Un chip stilizat, definit de ochi expresivi și accente de turcoaz, negru și ocru."
     }
   },
   {
     "file": "184748.webp",
     "title": {
-      "ro": "Ghiveci în albastru",
-      "en": "The blue pot"
+      "ro": "Pasărea în amiaza zilei",
+      "en": "Blue Bird"
     },
     "technique": {
       "ro": "Acrilic",
       "en": "Acrylic"
     },
     "collection": {
-      "ro": "Flori",
-      "en": "Flowers"
+      "ro": "Păsări",
+      "en": "Birds"
     },
-    "slug": "ghiveci-in-albastru",
+    "slug": "pasarea-in-amiaza-zi",
     "description": {
-      "ro": "Imagine generată pentru testarea galeriei. Nu reprezintă o lucrare originală a artistului.",
-      "en": "Generated image for gallery testing. Not an original artwork by the artist."
+      "en": "A blue bird takes shape against a luminous background of yellow, green and orange.",
+      "ro": "O pasăre albastră se conturează pe un fundal luminos, în tonuri de galben, verde și portocaliu."
     }
   }
 ]
