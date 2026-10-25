@@ -49,7 +49,7 @@ export function getArtworks(lang: Language): Artwork[] {
       return {
         slug,
         url: artworkUrl(slug, lang),
-        description: item?.description?.[lang],
+        description: item?.description?.[lang]?.trim().replace(/^[.\s…]+$/, '') || undefined,
         image: `/paintings/${encodeURIComponent(file)}`,
         title: item?.title?.[lang] || file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
         technique: item?.technique?.[lang] || (lang === 'ro' ? 'Tehnică nespecificată' : 'Unspecified technique'),

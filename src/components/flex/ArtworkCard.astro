@@ -4,8 +4,20 @@ interface Props { artwork: Artwork }
 const { artwork } = Astro.props;
 ---
 <artwork-card href={artwork.url} data-technique={artwork.technique} data-collection={artwork.collection}>
-  <img slot="image" src={artwork.image} alt={artwork.title} width="800" height="1000" loading="lazy" decoding="async" />
-  <span slot="title">{artwork.title}</span>
-  <span slot="details">{artwork.technique} · {artwork.collection}</span>
+  <a href={artwork.url}>
+    <div class="image"><img src={artwork.image} alt={artwork.title} width="800" height="1000" loading="lazy" decoding="async" /></div>
+    <h3>{artwork.title}</h3>
+    <p>{artwork.technique} · {artwork.collection}</p>
+  </a>
 </artwork-card>
 <script>import '../ui/ArtworkCard/index.js';</script>
+<style>
+  a { display: block; color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+  a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
+  .image { overflow: hidden; }
+  img { width: 100%; height: auto; display: block; transition: transform .3s; }
+  h3 { font: 1.6rem Georgia, serif; margin: 1rem 0 .4rem; }
+  p { color: var(--muted); font-size: .85rem; margin: 0; }
+  @media (prefers-reduced-motion: no-preference) { a:hover img { transform: scale(1.025); } }
+</style>

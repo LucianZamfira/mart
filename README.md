@@ -20,7 +20,7 @@ Copy entries from `src/data/artworks.example.json` into `src/data/artworks.json`
 
 ## Components
 
-`src/components/flex/ArtworkCard.astro` accepts a typed `Artwork` object from `src/lib/artworks.ts` and maps it to the Lit UI card. `src/components/ui/ArtworkCard/index.js` is independent of the content schema and Astro. Its slots are `image` (an image with alt text), `title` (plain text) and `details` (plain text). Its optional `href` property makes the card a keyboard-accessible link. It has no custom events. Its styling hooks are `--paper` and `--muted`. Light DOM slot content remains available before JavaScript loads.
+`src/components/flex/ArtworkCard.astro` accepts a typed `Artwork` object from `src/lib/artworks.ts` and renders the complete card, including its real anchor, into the initial HTML. The Lit UI host uses a default slot, so links and content work without JavaScript and remain crawlable. Card styles use `--accent` and `--muted`.
 
 ## Netlify
 
@@ -39,3 +39,11 @@ Each metadata entry may include a stable `slug` and bilingual `description`. Kee
 The build embeds a filename manifest from `public/paintings` into the server bundle; production requests do not read the deployment filesystem. New images or JSON edits still require a deploy. During local development, the image directory is read per request and image additions, deletions and changes trigger a browser reload automatically. Production still uses the build-time manifest.
 
 The detail page includes an image dialog (Escape closes it), localized previous/next navigation and a contact link. The latter prefills the homepage message with the artwork title, leaving the visitor to submit it manually.
+
+## Search indexing
+
+`site` in `astro.config.mjs` defines the production origin for canonical URLs, absolute RO/EN hreflang links, social previews, structured data, sitemap and robots.txt. Update it when moving domains. `src/components/SeoHead.astro` supplies shared metadata. Each language has its own canonical URL; inquiry query parameters are excluded.
+
+`/sitemap.xml` includes both homepages and every artwork in both languages, regenerated at build time. Thank-you pages carry `noindex` and are excluded. Artwork descriptions containing only dots are treated as missing; metadata then uses a factual fallback from title, artist, technique and collection. Add original descriptions in both languages for more useful page content.
+
+After deployment, verify the URL-prefix property `https://mart-gallery.netlify.app/` in Google Search Console, submit `sitemap.xml`, and use URL Inspection to test the homepage and an artwork URL. Search Console verification requires the owner's Google account; a verification file or meta token can be added when provided. See `docs/seo-audit.md` for findings and follow-up actions.

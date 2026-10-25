@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang: 'ro' | 'en';
+  romanianPath: string;
+  englishPath: string;
+  image: string;
+  imageAlt: string;
+  structuredData?: Record<string, unknown>;
+}
+const { title, description, lang, romanianPath, englishPath, image, imageAlt, structuredData } = Astro.props;
+if (!Astro.site) throw new Error('SEO metadata requires Astro site.');
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const canonical = absolute(lang === 'ro' ? romanianPath : englishPath);
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="ro" href={absolute(romanianPath)} />
+<link rel="alternate" hreflang="en" href={absolute(englishPath)} />
+<link rel="alternate" hreflang="x-default" href={absolute(romanianPath)} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="MART Gallery" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={lang === 'ro' ? 'ro_RO' : 'en_US'} />
+<meta property="og:locale:alternate" content={lang === 'ro' ? 'en_US' : 'ro_RO'} />
+<meta property="og:image" content={absolute(image)} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absolute(image)} />
+{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />}

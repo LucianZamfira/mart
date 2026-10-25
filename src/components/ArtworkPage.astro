@@ -1,6 +1,7 @@
 ---
 import { artworkUrl, getArtworks, type Artwork, type Language } from '../lib/artworks';
 import '../styles/global.css';
+import SeoHead from './SeoHead.astro';
 interface Props { artwork: Artwork; lang: Language }
 const { artwork, lang } = Astro.props;
 const ro = lang === 'ro';
@@ -10,16 +11,30 @@ const works = getArtworks(lang);
 const index = works.findIndex(item => item.slug === artwork.slug);
 const previous = works[index - 1];
 const next = works[index + 1];
+const description = artwork.description || t(
+  `„${artwork.title}”, pictură de Marian Preoteșescu. Tehnică: ${artwork.technique}. Colecția ${artwork.collection}. Vezi lucrarea și contactează artistul pentru detalii.`,
+  `“${artwork.title}”, a painting by Marian Preoteșescu. Technique: ${artwork.technique}. Collection: ${artwork.collection}. View the work and contact the artist for details.`,
+);
 ---
 <!doctype html>
 <html lang={lang}>
   <head><link rel="icon" type="image/png" href="/images/favicon.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{artwork.title} — MART Gallery</title>
-    <meta name="description" content={artwork.description || `${artwork.title} · Marian Preoteșescu · ${artwork.technique}`} />
-    <link rel="alternate" hreflang="ro" href={artworkUrl(artwork.slug, 'ro')} />
-    <link rel="alternate" hreflang="en" href={artworkUrl(artwork.slug, 'en')} />
+    <SeoHead
+      title={`${artwork.title} — Marian Preoteșescu | MART Gallery`}
+      description={description} lang={lang}
+      romanianPath={artworkUrl(artwork.slug, 'ro')} englishPath={artworkUrl(artwork.slug, 'en')}
+      image={artwork.image} imageAlt={`${artwork.title} — Marian Preoteșescu`}
+      structuredData={{
+        '@context': 'https://schema.org', '@type': 'VisualArtwork',
+        name: artwork.title, description, inLanguage: lang,
+        url: new URL(artwork.url, Astro.site).href,
+        image: new URL(artwork.image, Astro.site).href,
+        creator: { '@type': 'Person', name: 'Marian Preoteșescu' },
+        artform: ro ? 'Pictură' : 'Painting', artMedium: artwork.technique,
+      }}
+    />
   </head>
   <body>
     <a class="skip" href="#main">{t('Sari la conținut', 'Skip to content')}</a>

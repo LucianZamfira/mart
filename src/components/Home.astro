@@ -1,6 +1,7 @@
 ---
 import ArtworkCard from './flex/ArtworkCard.astro';
 import SectionLabel from './ui/SectionLabel.astro';
+import SeoHead from './SeoHead.astro';
 import { getArtworks, type Language } from '../lib/artworks';
 import '../styles/global.css';
 interface Props { lang: Language }
@@ -16,10 +17,23 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
   <head><link rel="icon" type="image/png" href="/images/favicon.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t('MART Gallery — Picturi de Marian Preoteșescu', 'MART Gallery — Paintings by Marian Preoteșescu')}</title>
-    <meta name="description" content={t('Descoperă universul pictural al lui Marian. Culoare, lumină și povești pe pânză.', 'Explore Marian’s world of painting. Colour, light and stories on canvas.')} />
-    <link rel="alternate" hreflang="ro" href="/" />
-    <link rel="alternate" hreflang="en" href="/en/" />
+    <SeoHead
+      title={t('MART Gallery — Picturi de Marian Preoteșescu', 'MART Gallery — Paintings by Marian Preoteșescu')}
+      description={t('Descoperă picturile lui Marian Preoteșescu: portrete, păsări și flori în acrilic. Explorează lucrările din MART Gallery și contactează artistul.', 'Discover paintings by Marian Preoteșescu: acrylic portraits, birds and flowers. Explore the works at MART Gallery and contact the artist.')}
+      lang={lang} romanianPath="/" englishPath="/en/"
+      image="/paintings/184744.webp" imageAlt={t('Chip în fragmente de culoare — Marian Preoteșescu', 'Face in Fragments of Colour — Marian Preoteșescu')}
+      structuredData={{
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'MART Gallery — Marian Preoteșescu',
+        url: new URL(ro ? '/' : '/en/', Astro.site).href,
+        inLanguage: lang,
+        about: { '@type': 'Person', name: 'Marian Preoteșescu', sameAs: ['https://www.instagram.com/marianpreo'] },
+        mainEntity: { '@type': 'ItemList', itemListElement: artworks.map((artwork, index) => ({
+          '@type': 'ListItem', position: index + 1, name: artwork.title, url: new URL(artwork.url, Astro.site).href,
+        })) },
+      }}
+    />
   </head>
   <body>
     <a class="skip" href="#main">{t('Sari la conținut', 'Skip to content')}</a>
@@ -56,7 +70,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         <div class="wrap atelier-inner">
           <div class="atelier-art" aria-hidden="true">
             <div class="atelier-number"><SectionLabel number="02" label={t('ATELIER', 'STUDIO')} /></div>
-            <img class="atelier-concept" src="/images/atelier-concept.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+            <img class="atelier-concept" src="/images/atelier-concept.webp" alt="" width="800" height="512" loading="lazy" decoding="async" />
           </div>
           <div class="atelier-copy">
             <p class="eyebrow">{t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p>
@@ -160,7 +174,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
       const message = document.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
       if (requestedArtwork && message && !message.value) {
         const card = cards.find(item => item.getAttribute('href')?.split('/').filter(Boolean).pop() === requestedArtwork);
-        const title = card?.querySelector('[slot="title"]')?.textContent;
+        const title = card?.querySelector('h3')?.textContent;
         if (title) message.value = document.documentElement.lang === 'ro'
           ? `Bună ziua! Aș dori mai multe detalii despre lucrarea „${title}”.`
           : `Hello! I would like more information about the artwork “${title}”.`;
@@ -194,7 +208,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
       loadMore?.addEventListener('click', () => {
         limit += 6;
         const firstNew = renderGallery();
-        firstNew?.shadowRoot?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+        firstNew?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
       });
       technique?.addEventListener('change', filter);
       collection?.addEventListener('change', filter);

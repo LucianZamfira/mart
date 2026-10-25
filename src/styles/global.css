@@ -196,6 +196,7 @@ textarea {
 
 /* Measured masonry keeps the artwork order in the DOM and natural image proportions. */
 .artworks { --gallery-columns: 3; }
+artwork-card:not(:defined) { padding: 0; background: transparent; }
 .artworks.is-masonry { display: block; position: relative; }
 .artworks.is-masonry > artwork-card { position: absolute; margin: 0; }
 @media (max-width: 700px) { .artworks { --gallery-columns: 2; } }
