@@ -1,4 +1,5 @@
 ---
+import { artistIdentity } from '../lib/identity';
 interface Props {
   title: string;
   description: string;
@@ -8,11 +9,29 @@ interface Props {
   image: string;
   imageAlt: string;
   structuredData?: Record<string, unknown>;
+  breadcrumbs?: { name: string; path: string }[];
 }
 const { title, description, lang, romanianPath, englishPath, image, imageAlt, structuredData } = Astro.props;
 if (!Astro.site) throw new Error('SEO metadata requires Astro site.');
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = absolute(lang === 'ro' ? romanianPath : englishPath);
+const artist = artistIdentity(Astro.site, lang);
+const website = {
+  '@type': 'WebSite', '@id': absolute('/#website'),
+  url: absolute('/'), name: 'MART Gallery',
+  alternateName: 'MART Gallery — Marian Preoteșescu',
+  inLanguage: ['ro', 'en'], creator: { '@id': artist['@id'] },
+};
+const breadcrumbs = Astro.props.breadcrumbs;
+const graph = [website, artist,
+  ...(structuredData ? [{ ...structuredData, '@context': undefined, '@id': `${canonical}#${structuredData['@type'] === 'VisualArtwork' ? 'artwork' : 'webpage'}` }] : []),
+  ...(breadcrumbs ? [{
+    '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`,
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem', position: index + 1, name: item.name, item: absolute(item.path),
+    })),
+  }] : []),
+];
 ---
 <title>{title}</title>
 <meta name="google-site-verification" content="6bRKA6hpe_1BhrIOB2hn6ObYoo1ezjf9ZrKPwn8VPpc" />
@@ -34,4 +53,4 @@ const canonical = absolute(lang === 'ro' ? romanianPath : englishPath);
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absolute(image)} />
-{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />}
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\u003c')} />

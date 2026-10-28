@@ -17,8 +17,9 @@ const contact = `${home}#contact`;
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <SeoHead title={`${page.title[lang]} — Marian Preoteșescu | MART Gallery`} description={page.description[lang]}
-      lang={lang} romanianPath={page.ro} englishPath={page.en} image="/paintings/184744.webp" imageAlt="Marian Preoteșescu — MART Gallery"
-      structuredData={{ '@context': 'https://schema.org', '@type': page.key === 'artist' ? 'AboutPage' : 'WebPage', name: page.title[lang], description: page.description[lang], inLanguage: lang, url: new URL(page[lang], Astro.site).href, about: { '@type': 'Person', name: 'Marian Preoteșescu' } }} />
+      lang={lang} romanianPath={page.ro} englishPath={page.en} image={page.key === 'artist' ? '/images/marian-preotesescu-avatar.png' : '/paintings/184744.webp'} imageAlt="Marian Preoteșescu — MART Gallery"
+      breadcrumbs={[{ name: t('Galerie', 'Gallery'), path: home }, { name: page.label[lang], path: page[lang] }]}
+      structuredData={{ '@context': 'https://schema.org', '@type': page.key === 'artist' ? 'ProfilePage' : 'WebPage', name: page.title[lang], description: page.description[lang], inLanguage: lang, url: new URL(page[lang], Astro.site).href, isPartOf: { '@id': new URL('/#website', Astro.site).href }, about: { '@id': new URL('/#artist', Astro.site).href }, ...(page.key === 'artist' ? { mainEntity: { '@id': new URL('/#artist', Astro.site).href } } : {}) }} />
   </head>
   <body>
     <a class="skip" href="#main">{t('Sari la conținut', 'Skip to content')}</a>
@@ -29,7 +30,9 @@ const contact = `${home}#contact`;
     </header>
     <main id="main" class="wrap info-page">
       <a class="info-back" href={home}>← {t('Înapoi la galerie', 'Back to the gallery')}</a>
+      <nav class="info-breadcrumb" aria-label={t('Locația în site', 'Breadcrumb')}><a href={home}>{t('Galerie', 'Gallery')}</a><span aria-hidden="true">/</span><span aria-current="page">{page.label[lang]}</span></nav>
       <div class="info-heading"><SectionLabel number="MART" label={t('DIN ATELIER', 'FROM THE STUDIO')} /><h1>{page.title[lang]}</h1><p>{page.intro[lang]}</p></div>
+      {page.key === 'artist' && <a class="artist-profile" href="https://www.instagram.com/marianpreo" target="_blank" rel="noopener noreferrer"><img src="/images/marian-preotesescu-avatar.png" alt="Marian Preoteșescu" width="64" height="64" /><span>{t('Marian Preoteșescu pe Instagram', 'Marian Preoteșescu on Instagram')} ↗</span></a>}
       <div class="info-columns">
         <div class="info-sections">{page.sections.map(section => <section><h2>{section.title[lang]}</h2><p>{section.text[lang]}</p></section>)}</div>
         <aside class="info-aside">
@@ -49,6 +52,9 @@ const contact = `${home}#contact`;
 <style>
   .info-page { padding-block: 40px 80px; }
   .info-back { font-size: 12px; color: var(--muted); }
+  .info-breadcrumb { flex-wrap: wrap; gap: 12px; margin-top: 24px; font-size: 12px; color: var(--muted); }
+  .artist-profile { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; font-size: 13px; color: var(--accent); }
+  .artist-profile img { border-radius: 50%; object-fit: cover; }
   .info-heading { max-width: 940px; padding-block: 55px; }
   .info-heading h1 { font-size: clamp(42px, 5.5vw, 78px); margin: 28px 0; }
   .info-heading>p { max-width: 720px; font-size: 19px; line-height: 1.8; color: var(--muted); }

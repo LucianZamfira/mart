@@ -26,12 +26,13 @@ const description = artwork.description || t(
       description={description} lang={lang}
       romanianPath={artworkUrl(artwork.slug, 'ro')} englishPath={artworkUrl(artwork.slug, 'en')}
       image={artwork.image} imageAlt={`${artwork.title} — Marian Preoteșescu`}
+      breadcrumbs={[{ name: t('Galerie', 'Gallery'), path: home }, { name: artwork.title, path: artwork.url }]}
       structuredData={{
         '@context': 'https://schema.org', '@type': 'VisualArtwork',
         name: artwork.title, description, inLanguage: lang,
         url: new URL(artwork.url, Astro.site).href,
         image: new URL(artwork.image, Astro.site).href,
-        creator: { '@type': 'Person', name: 'Marian Preoteșescu' },
+        creator: { '@id': new URL('/#artist', Astro.site).href },
         artform: ro ? 'Pictură' : 'Painting', artMedium: artwork.technique,
       }}
     />
@@ -46,7 +47,7 @@ const description = artwork.description || t(
       <div class="languages"><a href={artworkUrl(artwork.slug, 'ro')} lang="ro" aria-current={ro ? 'page' : undefined}>RO</a><span>/</span><a href={artworkUrl(artwork.slug, 'en')} lang="en" aria-current={!ro ? 'page' : undefined}>EN</a></div>
     </header>
     <main id="main" class="wrap detail">
-      <div class="detail-top"><nav aria-label={t('Locația în site', 'Breadcrumb')}><a href={`${home}#gallery`}>{t('Galerie', 'Gallery')}</a><span aria-hidden="true">/</span><span>{artwork.collection}</span></nav><a href={`${home}#gallery`}>← {t('Înapoi la galerie', 'Back to gallery')}</a></div>
+      <div class="detail-top"><nav aria-label={t('Locația în site', 'Breadcrumb')}><a href={home}>{t('Galerie', 'Gallery')}</a><span aria-hidden="true">/</span><span aria-current="page">{artwork.title}</span></nav><a href={`${home}#gallery`}>← {t('Înapoi la galerie', 'Back to gallery')}</a></div>
       <div class="detail-grid">
         <figure class="detail-figure">
           <a href={artwork.image} class="detail-zoom" data-zoom aria-label={t('Mărește imaginea', 'Enlarge image')}><img src={artwork.image} alt={artwork.title} width="1870" height="1873" fetchpriority="high" /></a>
@@ -88,7 +89,7 @@ const description = artwork.description || t(
 <style>
   .detail { padding-top: 28px; }
   .detail-top { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 36px; font-size: 12px; }
-  .detail-top nav { gap: 16px; font-size: inherit; }
+  .detail-top nav { gap: 16px; font-size: inherit; flex-wrap: wrap; min-width: 0; }
   .detail-top>a { color: var(--accent); }
   .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 7%; }
   .detail-figure { margin: 0; min-width: 0; }

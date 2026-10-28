@@ -48,6 +48,8 @@ Studio visits are by prior arrangement. No exact address, fixed pricing, deliver
 
 `site` in `astro.config.mjs` defines the production origin for canonical URLs, absolute RO/EN hreflang links, social previews, structured data, sitemap and robots.txt. Update it when moving domains. `src/components/SeoHead.astro` supplies shared metadata. Each language has its own canonical URL; inquiry query parameters are excluded.
 
+Structured data uses one JSON-LD graph per page: `WebSite` declares the preferred name MART Gallery, and `src/lib/identity.ts` defines one stable `Person` identity referenced by artwork creators and artist `ProfilePage` routes. Interior pages include breadcrumb markup matching visible navigation. Only the confirmed Instagram profile is linked via `sameAs`. Favicon and site-name changes require Google to recrawl; this markup does not guarantee a Knowledge Panel or enhanced search appearance.
+
 `/sitemap.xml` includes both homepages and every artwork in both languages, regenerated at build time. Thank-you pages carry `noindex` and are excluded. Artwork descriptions containing only dots are treated as missing; metadata then uses a factual fallback from title, artist, technique and collection. Add original descriptions in both languages for more useful page content.
 
 After deployment, verify the URL-prefix property `https://mart-gallery.netlify.app/` in Google Search Console, submit `sitemap.xml`, and use URL Inspection to test the homepage and an artwork URL. Search Console verification requires the owner's Google account; a verification file or meta token can be added when provided. See `docs/seo-audit.md` for findings and follow-up actions.

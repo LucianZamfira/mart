@@ -29,7 +29,8 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         name: 'MART Gallery — Marian Preoteșescu',
         url: new URL(ro ? '/' : '/en/', Astro.site).href,
         inLanguage: lang,
-        about: { '@type': 'Person', name: 'Marian Preoteșescu', sameAs: ['https://www.instagram.com/marianpreo'] },
+        isPartOf: { '@id': new URL('/#website', Astro.site).href },
+        about: { '@id': new URL('/#artist', Astro.site).href },
         mainEntity: { '@type': 'ItemList', itemListElement: artworks.map((artwork, index) => ({
           '@type': 'ListItem', position: index + 1, name: artwork.title, url: new URL(artwork.url, Astro.site).href,
         })) },
