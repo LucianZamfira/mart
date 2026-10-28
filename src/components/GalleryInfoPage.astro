@@ -1,0 +1,66 @@
+---
+import SeoHead from './SeoHead.astro';
+import SectionLabel from './ui/SectionLabel.astro';
+import { galleryPages, pageLinks } from '../data/gallery-pages';
+import type { Language } from '../lib/artworks';
+import '../styles/global.css';
+interface Props { page: typeof galleryPages[number]; lang: Language }
+const { page, lang } = Astro.props;
+const ro = lang === 'ro';
+const home = ro ? '/' : '/en/';
+const t = (a: string, b: string) => ro ? a : b;
+const contact = `${home}#contact`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <SeoHead title={`${page.title[lang]} — Marian Preoteșescu | MART Gallery`} description={page.description[lang]}
+      lang={lang} romanianPath={page.ro} englishPath={page.en} image="/paintings/184744.webp" imageAlt="Marian Preoteșescu — MART Gallery"
+      structuredData={{ '@context': 'https://schema.org', '@type': page.key === 'artist' ? 'AboutPage' : 'WebPage', name: page.title[lang], description: page.description[lang], inLanguage: lang, url: new URL(page[lang], Astro.site).href, about: { '@type': 'Person', name: 'Marian Preoteșescu' } }} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('Sari la conținut', 'Skip to content')}</a>
+    <header class="wrap">
+      <a class="brand" href={home} aria-label="MART Gallery"><img class="brand-mark" src="/images/mart-monogram.svg" alt="" width="112" height="109" /></a>
+      <nav aria-label={t('Navigare principală', 'Main navigation')}><a href={`${home}#gallery`}>{t('Lucrări', 'Works')}</a><a href={ro ? '/picturi-la-comanda/' : '/en/commissioned-paintings/'}>{t('La comandă', 'Commissions')}</a><a href={contact}>Contact</a></nav>
+      <div class="languages"><a href={page.ro} lang="ro" aria-current={ro ? 'page' : undefined}>RO</a><span>/</span><a href={page.en} lang="en" aria-current={!ro ? 'page' : undefined}>EN</a></div>
+    </header>
+    <main id="main" class="wrap info-page">
+      <a class="info-back" href={home}>← {t('Înapoi la galerie', 'Back to the gallery')}</a>
+      <div class="info-heading"><SectionLabel number="MART" label={t('DIN ATELIER', 'FROM THE STUDIO')} /><h1>{page.title[lang]}</h1><p>{page.intro[lang]}</p></div>
+      <div class="info-columns">
+        <div class="info-sections">{page.sections.map(section => <section><h2>{section.title[lang]}</h2><p>{section.text[lang]}</p></section>)}</div>
+        <aside class="info-aside">
+          <p class="eyebrow">{t('SĂ VORBIM DESPRE ARTĂ', 'LET’S TALK ABOUT ART')}</p>
+          <h2>{t('Ideea ta începe cu un mesaj.', 'Your idea starts with a message.')}</h2>
+          <p>{t('Spune-ne ce lucrare te interesează sau ce ai vrea să pictăm. Detaliile se stabilesc direct cu Marian.', 'Tell us which work interests you or what you would like painted. Arrange the details directly with Marian.')}</p>
+          <a class="button" href={contact}>{t('Scrie artistului', 'Contact the artist')} <span aria-hidden="true">↗</span></a>
+          <a class="info-email" href="mailto:marianpreo@gmail.com">marianpreo@gmail.com</a>
+          <p class="info-location">{t('Livrare în toată România. Întâlniri la un ceai sau o cafea: București, sectoarele 3 și 4, și Ilfov, cu programare.', 'Delivery throughout Romania. Meet over tea or coffee in Bucharest, Sectors 3 and 4, and Ilfov, by arrangement.')}</p>
+        </aside>
+      </div>
+      <nav class="info-related" aria-label={t('Descoperă și', 'Explore more')}>{pageLinks(lang).filter(link => link.href !== page[lang]).map(link => <a href={link.href}>{link.label} ↗</a>)}<a href={`${home}#gallery`}>{t('Toate lucrările', 'All paintings')} ↗</a></nav>
+    </main>
+    <footer class="wrap"><span>© {new Date().getFullYear()} MART Gallery</span><a href={contact}>Contact ↗</a></footer>
+  </body>
+</html>
+<style>
+  .info-page { padding-block: 40px 80px; }
+  .info-back { font-size: 12px; color: var(--muted); }
+  .info-heading { max-width: 940px; padding-block: 55px; }
+  .info-heading h1 { font-size: clamp(42px, 5.5vw, 78px); margin: 28px 0; }
+  .info-heading>p { max-width: 720px; font-size: 19px; line-height: 1.8; color: var(--muted); }
+  .info-columns { display: grid; grid-template-columns: 1.5fr 1fr; gap: 9%; align-items: start; }
+  .info-sections section { border-top: 1px solid #d8d5ca; padding-block: 30px; }
+  .info-sections h2 { font-size: 31px; letter-spacing: -1px; }
+  .info-sections p, .info-aside p { font-size: 15px; line-height: 1.9; color: var(--muted); }
+  .info-aside { background: var(--paper); padding: 32px; }
+  .info-aside h2 { font-size: 36px; letter-spacing: -1px; }
+  .info-aside .eyebrow { font-size: 10px; color: var(--accent); }
+  .info-email { display: block; margin-top: 24px; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 4px; }
+  .info-aside .info-location { font-size: 12px; }
+  .info-related { display: flex; flex-wrap: wrap; gap: 24px; border-top: 1px solid #d8d5ca; margin-top: 35px; padding-top: 28px; color: var(--accent); }
+  @media(max-width: 700px) { .info-columns { grid-template-columns: 1fr; gap: 24px; } .info-heading { padding-block: 35px; } .info-aside { padding: 24px; } }
+</style>

@@ -1,0 +1,9 @@
+---
+import GalleryInfoPage from '../../components/GalleryInfoPage.astro';
+import { galleryPages } from '../../data/gallery-pages';
+export function getStaticPaths() {
+  return galleryPages.map(page => ({ params: { info: page.en.split('/').filter(Boolean)[1] }, props: { page } }));
+}
+const { page } = Astro.props;
+---
+<GalleryInfoPage page={page} lang="en" />

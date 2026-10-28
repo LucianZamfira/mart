@@ -2,6 +2,7 @@
 import ArtworkCard from './flex/ArtworkCard.astro';
 import SectionLabel from './ui/SectionLabel.astro';
 import SeoHead from './SeoHead.astro';
+import { pageLinks } from '../data/gallery-pages';
 import { getArtworks, type Language } from '../lib/artworks';
 import '../styles/global.css';
 interface Props { lang: Language }
@@ -18,8 +19,8 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <SeoHead
-      title={t('MART Gallery — Picturi de Marian Preoteșescu', 'MART Gallery — Paintings by Marian Preoteșescu')}
-      description={t('Descoperă picturile lui Marian Preoteșescu: portrete, păsări și flori în acrilic. Explorează lucrările din MART Gallery și contactează artistul.', 'Discover paintings by Marian Preoteșescu: acrylic portraits, birds and flowers. Explore the works at MART Gallery and contact the artist.')}
+      title={t('Tablouri pictate manual — Marian Preoteșescu | MART Gallery', 'Hand-painted artworks — Marian Preoteșescu | MART Gallery')}
+      description={t('Tablouri pictate manual și picturi la comandă de Marian Preoteșescu, artist din Ilfov. Livrare în toată România și întâlniri în București și Ilfov.', 'Hand-painted artworks and commissions by Marian Preoteșescu, an artist from Ilfov. Delivery throughout Romania and meetings in Bucharest and Ilfov.')}
       lang={lang} romanianPath="/" englishPath="/en/"
       image="/paintings/184744.webp" imageAlt={t('Chip în fragmente de culoare — Marian Preoteșescu', 'Face in Fragments of Colour — Marian Preoteșescu')}
       structuredData={{
@@ -40,7 +41,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     <header class="wrap">
       <a class="brand" href={ro ? '/' : '/en/'} aria-label="MART Gallery"><img class="brand-mark" src="/images/mart-monogram.svg" alt="" width="112" height="109" /></a>
       <nav aria-label={t('Navigare principală', 'Main navigation')}>
-        <a href="#gallery">{t('Lucrări', 'Works')}</a><a href="#about">{t('Despre', 'About')}</a><a href="#contact">Contact</a>
+        <a href="#gallery">{t('Lucrări', 'Works')}</a><a href={ro ? '/picturi-la-comanda/' : '/en/commissioned-paintings/'}>{t('La comandă', 'Commissions')}</a><a href="#about">{t('Despre', 'About')}</a><a href="#contact">Contact</a>
       </nav>
       <div class="languages" aria-label={t('Limba', 'Language')}><a href="/" lang="ro" aria-current={ro ? 'page' : undefined}>RO</a><span>/</span><a href="/en/" lang="en" aria-current={!ro ? 'page' : undefined}>EN</a></div>
     </header>
@@ -48,13 +49,14 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
       <section class="hero hero-color wrap">
         <div class="hero-painting hero-portrait" aria-hidden="true"><img src="/paintings/184744.webp" alt="" width="1870" height="1873" fetchpriority="high" /><video id="hero-video" muted loop playsinline preload="none" poster="/paintings/184744.webp" data-src="/paintings/animated-paint.mp4"></video></div><div class="hero-painting hero-bird" aria-hidden="true"><img src="/paintings/184741.webp" alt="" width="1870" height="1873" /></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
           <h1>{t('Lumea, privită', 'The world, seen')}<br /><em>{t('în culori.', 'in colour.')}</em></h1>
-          <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Un loc pentru pictură, emoție și lucrurile care merită privite mai îndeaproape.', 'A place for painting, emotion and the things that deserve a closer look.')}</p>
+          <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Tablouri pictate manual, portrete și povești în culoare. Pictură originală și lucrări la comandă, din Ilfov.', 'Hand-painted artworks, portraits and stories in colour. Original paintings and commissions from Ilfov.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
         </div>
         <button type="button" class="hero-video-toggle" hidden data-pause={t('Oprește animația', 'Pause animation')} data-play={t('Pornește animația', 'Play animation')}>{t('Oprește animația', 'Pause animation')}</button><div class="hero-foot"><span class="label">{t('PICTURĂ & EXPLORĂRI VIZUALE', 'PAINTING & VISUAL EXPLORATIONS')}</span><a href="#gallery" title="MART GALLERY">MART GALLERY <span aria-hidden="true">↓</span></a></div>
       </section>
       <section id="gallery" class="gallery wrap">
-        <div class="section-head"><div><SectionLabel number="01" label={t('GALERIE', 'GALLERY')} /><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare pânză, o altă poveste.', 'Every canvas, another story.')}</p></div>
+        <div class="section-head"><div><SectionLabel number="01" label={t('GALERIE', 'GALLERY')} /><h2>{t('Din atelier.', 'From the studio.')}</h2></div><p>{t('Fiecare tablou, o altă poveste.', 'Every painting, another story.')}</p></div>
+        <p class="gallery-intro">{t('Descoperă picturi în acrilic de Marian Preoteșescu: portrete, păsări și flori, pe pânză sau pe suport rigid. Deschide fiecare lucrare pentru detalii și scrie artistului pentru a confirma suportul, dimensiunile și disponibilitatea.', 'Explore acrylic paintings by Marian Preoteșescu: portraits, birds and flowers on canvas or rigid supports. Open an artwork for details and ask the artist to confirm its support, dimensions and availability.')}</p>
         <div class="filters">
           <label>{t('Tehnică', 'Technique')}<select id="technique"><option value="">{t('Toate tehnicile', 'All techniques')}</option>{techniques.map(value => <option>{value}</option>)}</select></label>
           <label>{t('Colecție', 'Collection')}<select id="collection"><option value="">{t('Toate colecțiile', 'All collections')}</option>{collections.map(value => <option>{value}</option>)}</select></label>
@@ -76,16 +78,22 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
             <p class="eyebrow">{t('DESPRE ARTIST', 'ABOUT THE ARTIST')}</p>
             <h2 id="artist-heading">Marian Preoteșescu</h2>
             <span class="atelier-rule" aria-hidden="true"></span>
-            <p class="atelier-description">{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu. Aici, lucrările se întâlnesc într-o colecție în continuă creștere, invitând la răgaz și descoperire.', 'MART Gallery is a space dedicated to Marian Preoteșescu’s paintings. Here, the works come together in a growing collection, inviting a moment of pause and discovery.')}</p>
+            <p class="atelier-description">{t('MART Gallery este spațiul dedicat picturilor lui Marian Preoteșescu, pictor român din Ilfov. Portretele, păsările și florile se întâlnesc într-o colecție de tablouri pictate manual, deschisă și ideilor pentru lucrări la comandă.', 'MART Gallery presents paintings by Marian Preoteșescu, a Romanian artist from Ilfov. Portraits, birds and flowers come together in a collection of hand-painted artworks, with room for new commissioned ideas.')}</p>
             <div class="atelier-bottom">
               <a class="atelier-identity" href="https://www.instagram.com/marianpreo" target="_blank" rel="noopener noreferrer" aria-label={t('Profilul Instagram al lui Marian Preoteșescu (se deschide într-o filă nouă)', 'Marian Preoteșescu on Instagram (opens in a new tab)')} title={t('Vezi profilul Instagram', 'View Instagram profile')}><img src="/images/marian-preotesescu-avatar.png" alt="" width="44" height="44" loading="lazy" decoding="async" /><span>{t('Vezi profilul Instagram', 'View Instagram profile')} <span aria-hidden="true">↗</span></span></a>
-              <a class="atelier-link" href="#gallery">{t('Explorează lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
+              <a class="atelier-link" href={ro ? '/despre-artist/' : '/en/about-the-artist/'}>{t('Cunoaște artistul', 'Meet the artist')} ↗</a>
             </div>
           </div>
         </div>
       </section>
-      <section id="contact" class="contact wrap"><div><SectionLabel number="03" label="CONTACT" /><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Pentru detalii despre lucrări, lucrări la cerere sau un simplu salut.', 'For details about the paintings, custom works or just to say hello.')}</p><a class="email" href="mailto:marianpreo@gmail.com">marianpreo@gmail.com ↗</a></div>
+      <!-- <section class="commission-intro wrap" aria-labelledby="commission-heading">
+        <div><p class="eyebrow">{t('PICTURI LA COMANDĂ', 'COMMISSIONED PAINTINGS')}</p><h2 id="commission-heading">{t('O idee a ta.', 'Your idea.')}<br /><em>{t('O pictură personală.', 'A personal painting.')}</em></h2></div>
+        <div><p>{t('Cauți un tablou pictat manual pentru tine sau pentru un cadou? Discută direct cu Marian despre temă, dimensiuni și suport. Prețul și termenul se stabilesc pentru fiecare lucrare.', 'Looking for a hand-painted artwork for yourself or as a gift? Discuss the subject, dimensions and support directly with Marian. Price and timing are agreed for each work.')}</p><a class="button" href={ro ? '/picturi-la-comanda/' : '/en/commissioned-paintings/'}>{t('Cum comand o pictură', 'How to commission a painting')} <span aria-hidden="true">↗</span></a></div>
+      </section> -->
+      <section id="contact" class="contact wrap"><div><SectionLabel number="03" label="CONTACT" /><h2>{t('Să vorbim', 'Let’s talk')}<br /><em>{t('despre artă.', 'about art.')}</em></h2><p>{t('Cauți un tablou pictat manual pentru tine sau pentru un cadou? Discută direct cu Marian despre temă, dimensiuni și suport. Prețul și termenul se stabilesc pentru fiecare lucrare.', 'Looking for a hand-painted artwork for yourself or as a gift? Discuss the subject, dimensions and support directly with Marian. Price and timing are agreed for each work.')}</p>
+        <a class="button" href={ro ? '/picturi-la-comanda/' : '/en/commissioned-paintings/'}>{t('Cum comand o pictură', 'How to commission a painting')} <span aria-hidden="true">↗</span></a></div>
         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={ro ? '/multumim/' : '/en/thank-you/'}>
+          <p>{t('Pentru detalii despre lucrări, lucrări la cerere sau un simplu salut.', 'For details about the paintings, custom works or just to say hello.')}</p>
           <input type="hidden" name="form-name" value="contact" /><input type="hidden" name="language" value={lang} />
           <p hidden><label>Leave empty <input name="bot-field" /></label></p>
           <label>{t('Numele tău', 'Your name')}<input name="name" autocomplete="name" required maxlength="120" /></label>
@@ -96,6 +104,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
         </form>
       </section>
     </main>
+    <div class="wrap gallery-discover"><nav aria-label={t('Despre galerie și atelier', 'Gallery and studio')}>{pageLinks(lang).map(link => <a href={link.href}>{link.label} ↗</a>)}</nav><p>{t('Livrăm picturile în toată România. În București, în sectoarele 3 și 4, și în Ilfov, ne putem întâlni la un ceai sau o cafea caldă cu artistul. Întâlnirile și vizitele la atelierul din Ilfov se stabilesc în prealabil.', 'We deliver paintings throughout Romania. In Bucharest, Sectors 3 and 4, and Ilfov, meet the artist over a cup of tea or warm coffee. Meetings and visits to the studio in Ilfov are arranged in advance.')}</p></div>
     <footer class="wrap"><span>© {new Date().getFullYear()} MART Gallery</span><span>{t('Artă care rămâne cu tine.', 'Art that stays with you.')}</span><a href="#main">{t('Înapoi sus', 'Back to top')} ↑</a></footer>
     <script>
       const heroVideo = document.querySelector<HTMLVideoElement>('#hero-video');

@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getArtworks } from '../lib/artworks';
+import { galleryPages } from '../data/gallery-pages';
 
 export const prerender = true;
 
@@ -12,6 +13,7 @@ export const GET: APIRoute = ({ site }) => {
   const absolute = (path: string) => escapeXml(new URL(path, site).href);
   const pairs = [
     { ro: '/', en: '/en/' },
+    ...galleryPages.map(page => ({ ro: page.ro, en: page.en })),
     ...getArtworks('ro').map(artwork => ({
       ro: artwork.url,
       en: `/en/artworks/${artwork.slug}/`,
