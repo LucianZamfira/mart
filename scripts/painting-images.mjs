@@ -10,7 +10,7 @@ const output = fileURLToPath(new URL('../public/generated/paintings/', import.me
 /** Create responsive previews without changing original artworks or gallery discovery. */
 export async function preparePaintingImages() {
   await mkdir(output, { recursive: true });
-  const files = (await readdir(source)).filter(file => /\.(jpe?g|png|webp|avif)$/i.test(file));
+  const files = (await readdir(source)).filter(file => /\.(jpe?g|png|webp|avif)$/i.test(file) && !/^animated-paint\./i.test(file));
   const manifest = {};
   for (const file of files) {
     const bytes = await readFile(join(source, file));

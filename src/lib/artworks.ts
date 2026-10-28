@@ -49,6 +49,7 @@ export function paintingImage(name: string): string | undefined {
 export function getArtworks(lang: Language): Artwork[] {
   return [...paintingFiles()]
     .filter(file => /\.(jpe?g|png|webp|avif)$/i.test(file))
+    .filter(file => !/^animated-paint\./i.test(file))
     .sort((a, b) => a.localeCompare(b))
     .map(file => {
       const item = entries.find(entry => entry.file === file)

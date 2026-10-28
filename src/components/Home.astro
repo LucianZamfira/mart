@@ -50,7 +50,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     </header>
     <main id="main">
       <section class="hero hero-color wrap">
-        <div class="hero-painting hero-portrait" aria-hidden="true"><img src={heroPortrait.src} srcset={heroPortrait.srcset} sizes="(max-width: 700px) 88vw, (max-width: 1500px) 43vw, 690px" alt="" width={heroPortrait.width} height={heroPortrait.height} loading="eager" decoding="async" fetchpriority="high" /><video id="hero-video" muted loop playsinline preload="none" poster={heroPortrait.src} data-src="/paintings/animated-paint.mp4"></video></div><div class="hero-painting hero-bird" aria-hidden="true"><picture><source media="(min-width: 701px)" srcset={heroCompanion.srcset} sizes="(max-width: 1500px) 43vw, 690px" /><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" width={heroCompanion.width} height={heroCompanion.height} decoding="async" /></picture></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
+        <div class="hero-painting hero-portrait" aria-hidden="true"><img src={heroPortrait.src} srcset={heroPortrait.srcset} sizes="(max-width: 700px) 88vw, (max-width: 1500px) 43vw, 690px" alt="" width={heroPortrait.width} height={heroPortrait.height} loading="eager" decoding="async" fetchpriority="high" /><img id="hero-animation" src={heroPortrait.src} alt="" width={heroPortrait.width} height={heroPortrait.height} decoding="async" data-src="/paintings/animated-paint.avif" /></div><div class="hero-painting hero-bird" aria-hidden="true"><picture><source media="(min-width: 701px)" srcset={heroCompanion.srcset} sizes="(max-width: 1500px) 43vw, 690px" /><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" width={heroCompanion.width} height={heroCompanion.height} decoding="async" /></picture></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
           <h1>{t('Lumea, privită', 'The world, seen')}<br /><em>{t('în culori.', 'in colour.')}</em></h1>
           <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Tablouri pictate manual, portrete și povești în culoare. Pictură originală și lucrări la comandă, din Ilfov.', 'Hand-painted artworks, portraits and stories in colour. Original paintings and commissions from Ilfov.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
@@ -110,53 +110,49 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     <div class="wrap gallery-discover"><nav aria-label={t('Despre galerie și atelier', 'Gallery and studio')}>{pageLinks(lang).map(link => <a href={link.href}>{link.label} ↗</a>)}</nav><p>{t('Livrăm picturile în toată România. În București, în sectoarele 3 și 4, și în Ilfov, ne putem întâlni la un ceai sau o cafea caldă cu artistul. Întâlnirile și vizitele la atelierul din Ilfov se stabilesc în prealabil.', 'We deliver paintings throughout Romania. In Bucharest, Sectors 3 and 4, and Ilfov, meet the artist over a cup of tea or warm coffee. Meetings and visits to the studio in Ilfov are arranged in advance.')}</p></div>
     <footer class="wrap"><span>© {new Date().getFullYear()} MART Gallery</span><span>{t('Artă care rămâne cu tine.', 'Art that stays with you.')}</span><a href="#main">{t('Înapoi sus', 'Back to top')} ↑</a></footer>
     <script>
-      const heroVideo = document.querySelector<HTMLVideoElement>('#hero-video');
-      const videoToggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
+      const heroAnimation = document.querySelector<HTMLImageElement>('#hero-animation');
+      const animationToggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (heroVideo && videoToggle) {
-        let videoVisible = false;
-        let pageLoaded = document.readyState === 'complete';
+      if (heroAnimation && animationToggle) {
+        const poster = heroAnimation.src;
+        let visible = false;
+        let loaded = document.readyState === 'complete';
         let userPaused = false;
-        const updateVideo = () => {
-          if (reducedMotion.matches) {
-            heroVideo.pause();
-            heroVideo.parentElement?.classList.remove('is-playing');
-            videoToggle.hidden = true;
+        let failed = false;
+        let request = 0;
+        const updateAnimation = async () => {
+          const currentRequest = ++request;
+          const play = loaded && visible && !userPaused && !reducedMotion.matches && !failed;
+          animationToggle.hidden = reducedMotion.matches || failed;
+          animationToggle.textContent = play ? animationToggle.dataset.pause || '' : animationToggle.dataset.play || '';
+          if (!play) {
+            heroAnimation.parentElement?.classList.remove('is-playing');
+            heroAnimation.src = poster;
             return;
           }
-          if (!pageLoaded || !videoVisible || userPaused) {
-            heroVideo.pause();
-            return;
+          const source = heroAnimation.dataset.src;
+          if (!source) return;
+          if (heroAnimation.getAttribute('src') !== source) heroAnimation.src = source;
+          try {
+            await heroAnimation.decode();
+            if (currentRequest === request) heroAnimation.parentElement?.classList.add('is-playing');
+          } catch {
+            if (currentRequest !== request) return;
+            failed = true;
+            updateAnimation();
           }
-          if (!heroVideo.getAttribute('src')) heroVideo.src = heroVideo.dataset.src || '';
-          heroVideo.muted = true;
-          heroVideo.play().catch(() => { videoToggle.hidden = false; videoToggle.textContent = videoToggle.dataset.play || ''; });
         };
-        heroVideo.addEventListener('playing', () => {
-          heroVideo.parentElement?.classList.add('is-playing');
-          videoToggle.hidden = false;
-          videoToggle.textContent = videoToggle.dataset.pause || '';
+        animationToggle.addEventListener('click', () => {
+          userPaused = !userPaused;
+          updateAnimation();
         });
-        heroVideo.addEventListener('pause', () => { videoToggle.textContent = videoToggle.dataset.play || ''; });
-        heroVideo.addEventListener('error', () => {
-          heroVideo.parentElement?.classList.remove('is-playing');
-          videoToggle.hidden = true;
-        });
-        videoToggle.addEventListener('click', () => {
-          userPaused = !heroVideo.paused;
-          if (userPaused) heroVideo.pause();
-          else updateVideo();
-        });
-        reducedMotion.addEventListener('change', updateVideo);
-        if (!pageLoaded) window.addEventListener('load', () => {
-          pageLoaded = true;
-          updateVideo();
-        }, { once: true });
+        reducedMotion.addEventListener('change', updateAnimation);
+        if (!loaded) window.addEventListener('load', () => { loaded = true; updateAnimation(); }, { once: true });
         new IntersectionObserver(([entry]) => {
-          videoVisible = entry.isIntersecting;
-          updateVideo();
-        }, { threshold: 0 }).observe(heroVideo.parentElement!);
-        updateVideo();
+          visible = entry.isIntersecting;
+          updateAnimation();
+        }).observe(heroAnimation.parentElement!);
+        updateAnimation();
       }
       const technique = document.querySelector<HTMLSelectElement>('#technique');
       const collection = document.querySelector<HTMLSelectElement>('#collection');
