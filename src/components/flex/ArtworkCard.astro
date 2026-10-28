@@ -5,7 +5,7 @@ const { artwork } = Astro.props;
 ---
 <artwork-card href={artwork.url} data-technique={artwork.technique} data-collection={artwork.collection}>
   <a href={artwork.url}>
-    <div class="image"><img src={artwork.image} alt={artwork.title} width="800" height="1000" loading="lazy" decoding="async" /></div>
+    <div class="image"><img src={artwork.preview.src} srcset={artwork.preview.srcset} sizes="(max-width: 440px) 88vw, (max-width: 700px) 42vw, (max-width: 1400px) 28vw, 390px" alt={artwork.title} width={artwork.preview.width} height={artwork.preview.height} loading="lazy" decoding="async" /></div>
     <h3>{artwork.title}</h3>
     <p>{artwork.technique} · {artwork.collection}</p>
   </a>

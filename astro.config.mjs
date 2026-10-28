@@ -3,8 +3,10 @@ import netlify from '@astrojs/netlify';
 import { readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { preparePaintingImages } from './scripts/painting-images.mjs';
 
 const paintingsDirectory = fileURLToPath(new URL('./public/paintings/', import.meta.url));
+const paintingImages = await preparePaintingImages();
 
 export default defineConfig({
   site: 'https://mart-gallery.netlify.app',
@@ -15,10 +17,14 @@ export default defineConfig({
       name: 'reload-painting-gallery',
       apply: 'serve',
       configureServer(server) {
+        let pending = Promise.resolve();
         const reload = (file) => {
           if (resolve(dirname(file)) === resolve(paintingsDirectory)
             && /\.(jpe?g|png|webp|avif)$/i.test(file)) {
-            server.ws.send({ type: 'full-reload', path: '*' });
+            pending = pending.then(async () => {
+              await preparePaintingImages();
+              server.ws.send({ type: 'full-reload', path: '*' });
+            }).catch(error => server.config.logger.error(String(error)));
           }
         };
         server.watcher.add(paintingsDirectory);
@@ -30,6 +36,7 @@ export default defineConfig({
     }],
     define: {
       __PAINTING_FILES__: JSON.stringify(readdirSync(new URL('./public/paintings/', import.meta.url))),
+      __PAINTING_IMAGES__: JSON.stringify(paintingImages),
     },
   },
 });

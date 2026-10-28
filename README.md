@@ -14,6 +14,8 @@ Use Node.js 24. Run `npm ci`, then `npm start` (or `npm run dev`). Open `http://
 
 ## Add paintings
 
+At Astro startup/build, `scripts/painting-images.mjs` uses Sharp to create cached WebP previews at up to 320, 640 and 960 pixels in `public/generated/paintings/` (ignored by Git). The homepage hero and gallery use these via `srcset` and `sizes`; original files remain available on artwork detail pages. Real image dimensions reserve the correct aspect ratio. Changes to the paintings directory regenerate previews during development. Production embeds the preview manifest, so SSR does not read or transform local files. The hero video starts only after the page load event and when visible, pauses offscreen, and respects manual pause and reduced motion.
+
 Put JPG, PNG, WebP or AVIF files directly in `public/paintings/`, then commit and push. They are discovered automatically at build time. Use reasonably sized, web-optimized images; files in public are served unchanged. Without metadata, the filename becomes the title, the technique is unspecified and the collection is Studio.
 
 Copy entries from `src/data/artworks.example.json` into `src/data/artworks.json` to supply bilingual titles, techniques and collections. The `file` field can contain the filename with or without its image extension. Metadata also matches by filename stem when an image changes from PNG/JPG to WebP/AVIF; keep the stem unchanged. The example is a fixture only and is never displayed. Both filters are combined. Missing photographs produce an intentional empty state.

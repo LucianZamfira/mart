@@ -3,12 +3,14 @@ import ArtworkCard from './flex/ArtworkCard.astro';
 import SectionLabel from './ui/SectionLabel.astro';
 import SeoHead from './SeoHead.astro';
 import { pageLinks } from '../data/gallery-pages';
-import { getArtworks, type Language } from '../lib/artworks';
+import { getArtworks, paintingPreview, type Language } from '../lib/artworks';
 import '../styles/global.css';
 interface Props { lang: Language }
 const { lang } = Astro.props;
 const ro = lang === 'ro';
 const artworks = getArtworks(lang);
+const heroPortrait = paintingPreview('184744.webp');
+const heroCompanion = paintingPreview('184740.webp');
 const techniques = [...new Set(artworks.map(item => item.technique))];
 const collections = [...new Set(artworks.map(item => item.collection))];
 const t = (romanian: string, english: string) => ro ? romanian : english;
@@ -48,7 +50,7 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
     </header>
     <main id="main">
       <section class="hero hero-color wrap">
-        <div class="hero-painting hero-portrait" aria-hidden="true"><img src="/paintings/184744.webp" alt="" width="1870" height="1873" loading="eager" decoding="sync" fetchpriority="high" /><video id="hero-video" muted loop playsinline preload="none" poster="/paintings/184744.webp" data-src="/paintings/animated-paint.mp4"></video></div><div class="hero-painting hero-bird" aria-hidden="true"><img src="/paintings/184740.webp" alt="" width="1870" height="1873" loading="eager" decoding="sync" fetchpriority="high" /></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
+        <div class="hero-painting hero-portrait" aria-hidden="true"><img src={heroPortrait.src} srcset={heroPortrait.srcset} sizes="(max-width: 700px) 88vw, (max-width: 1500px) 43vw, 690px" alt="" width={heroPortrait.width} height={heroPortrait.height} loading="eager" decoding="async" fetchpriority="high" /><video id="hero-video" muted loop playsinline preload="none" poster={heroPortrait.src} data-src="/paintings/animated-paint.mp4"></video></div><div class="hero-painting hero-bird" aria-hidden="true"><picture><source media="(min-width: 701px)" srcset={heroCompanion.srcset} sizes="(max-width: 1500px) 43vw, 690px" /><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" width={heroCompanion.width} height={heroCompanion.height} decoding="async" /></picture></div><span class="hero-dot dot-blue" aria-hidden="true"></span><span class="hero-dot dot-gold" aria-hidden="true"></span><div class="hero-copy"><p class="eyebrow">{t('UN UNIVERS SEMNAT MARIAN', 'A WORLD BY MARIAN')}</p>
           <h1>{t('Lumea, privită', 'The world, seen')}<br /><em>{t('în culori.', 'in colour.')}</em></h1>
           <p class="hero-artist">Marian Preoteșescu</p><p class="intro">{t('Tablouri pictate manual, portrete și povești în culoare. Pictură originală și lucrări la comandă, din Ilfov.', 'Hand-painted artworks, portraits and stories in colour. Original paintings and commissions from Ilfov.')}</p>
           <a class="button" href="#gallery">{t('Descoperă lucrările', 'Explore the works')} <span aria-hidden="true">↗</span></a>
@@ -112,11 +114,18 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
       const videoToggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (heroVideo && videoToggle) {
+        let videoVisible = false;
+        let pageLoaded = document.readyState === 'complete';
+        let userPaused = false;
         const updateVideo = () => {
           if (reducedMotion.matches) {
             heroVideo.pause();
             heroVideo.parentElement?.classList.remove('is-playing');
             videoToggle.hidden = true;
+            return;
+          }
+          if (!pageLoaded || !videoVisible || userPaused) {
+            heroVideo.pause();
             return;
           }
           if (!heroVideo.getAttribute('src')) heroVideo.src = heroVideo.dataset.src || '';
@@ -134,10 +143,19 @@ const t = (romanian: string, english: string) => ro ? romanian : english;
           videoToggle.hidden = true;
         });
         videoToggle.addEventListener('click', () => {
-          if (heroVideo.paused) heroVideo.play().catch(() => {});
-          else heroVideo.pause();
+          userPaused = !heroVideo.paused;
+          if (userPaused) heroVideo.pause();
+          else updateVideo();
         });
         reducedMotion.addEventListener('change', updateVideo);
+        if (!pageLoaded) window.addEventListener('load', () => {
+          pageLoaded = true;
+          updateVideo();
+        }, { once: true });
+        new IntersectionObserver(([entry]) => {
+          videoVisible = entry.isIntersecting;
+          updateVideo();
+        }, { threshold: 0 }).observe(heroVideo.parentElement!);
         updateVideo();
       }
       const technique = document.querySelector<HTMLSelectElement>('#technique');

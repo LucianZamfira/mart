@@ -83,17 +83,18 @@ textarea {
   .brand-mark { width: 43px; height: 42px; }
   .brand-wordmark strong { font-size: 20px; letter-spacing: 2px; }
   .brand-wordmark small { font-size: 6px; letter-spacing: 3px; }
-  .hero-color { min-height: 760px; justify-content: start; padding-top: 30px; gap: 0; }
+  .hero-color { min-height: 0; justify-content: start; padding-top: 30px; gap: 0; }
   .hero-color .hero-copy { width: 92%; padding: 15px 10px 0; }
   .hero-color h1 { font-size: clamp(46px, 10vw, 65px); }
   .hero-color .intro { font-size: 13px; max-width: 310px; }
   .hero-artist { font-size: 14px; letter-spacing: 2px; margin-top: 18px; }
   .hero-painting { width: 58%; top: auto; bottom: 65px; }
-  .hero-portrait { left: -9%; }
-  .hero-bird { right: -9%; }
+  .hero-portrait { position: relative; width: 88%; left: auto; bottom: auto; margin: 28px auto 0; transform: none; order: 1; z-index: 0; }
+  .hero-bird { display: none; }
+  .hero-video-toggle { order: 2; }
   .dot-blue { top: auto; bottom: 230px; right: 8%; width: 65px; height: 65px; }
   .dot-gold { bottom: 110px; left: 44%; width: 50px; height: 50px; }
-  .hero-color .hero-foot { margin-top: auto; padding-bottom: 18px; gap: 10px; }
+  .hero-color .hero-foot { order: 3; margin-top: 32px; padding-bottom: 18px; gap: 10px; }
 }
 @media (max-width: 380px) {
   header.wrap { width: 94%; }

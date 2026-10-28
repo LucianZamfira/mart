@@ -1,5 +1,5 @@
 import metadata from '../data/artworks.json';
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export type Language = 'ro' | 'en';
@@ -17,12 +17,20 @@ export interface Artwork {
   url: string;
   description?: string;
   image: string;
+  preview: { width: number; height: number; src: string; srcset: string };
   title: string;
   technique: string;
   collection: string;
 }
 const entries: ArtworkMetadata[] = metadata;
 const imageStem = (file: string): string => file.replace(/\.(jpe?g|png|webp|avif)$/i, '');
+
+export function paintingPreview(file: string) {
+  const images: typeof __PAINTING_IMAGES__ = import.meta.env.DEV
+    ? JSON.parse(readFileSync(resolve(process.cwd(), 'public/generated/paintings/manifest.json'), 'utf8'))
+    : __PAINTING_IMAGES__;
+  return images[file];
+}
 
 function paintingFiles(): string[] {
   return import.meta.env.DEV
@@ -51,6 +59,7 @@ export function getArtworks(lang: Language): Artwork[] {
         url: artworkUrl(slug, lang),
         description: item?.description?.[lang]?.trim().replace(/^[.\s…]+$/, '') || undefined,
         image: `/paintings/${encodeURIComponent(file)}`,
+        preview: paintingPreview(file),
         title: item?.title?.[lang] || file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
         technique: item?.technique?.[lang] || (lang === 'ro' ? 'Tehnică nespecificată' : 'Unspecified technique'),
         collection: item?.collection?.[lang] || (lang === 'ro' ? 'Atelier' : 'Studio'),
